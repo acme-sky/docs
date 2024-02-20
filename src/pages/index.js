@@ -1,3 +1,11 @@
+import BrowserOnly from "@docusaurus/BrowserOnly";
+
 export default function Home() {
-    window.location.href = "/docs";
+    return (
+        <BrowserOnly>
+            {() => {
+                window.location.href = "/docs";
+            }}
+        </BrowserOnly>
+    );
 }
