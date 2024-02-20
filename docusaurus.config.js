@@ -42,12 +42,14 @@ const config = {
             /** @type {import('@docs/preset-classic').Options} */
             ({
                 docs: {
-                    sidebarPath: "./sidebars.js",
-                    // Please change this to your repo.
-                    // Remove this to remove the "edit this page" links.
-                    editUrl:
-                        "https://github.com/acme-sky/docs/tree/main/packages/create-docs/templates/shared/",
+                    // sidebarPath: "./sidebars.js",
+                    // // Please change this to your repo.
+                    // // Remove this to remove the "edit this page" links.
+                    // editUrl:
+                    //     "https://github.com/acme-sky/docs/tree/main/packages/create-docs/templates/shared/",
+                    routeBasePath: "/",
                 },
+                blog: false,
                 theme: {
                     customCss: "./src/css/custom.css",
                 },
