@@ -70,12 +70,6 @@ const config = {
                 },
                 items: [
                     {
-                        type: "docSidebar",
-                        sidebarId: "defaultSidebar",
-                        position: "left",
-                        label: "Docs",
-                    },
-                    {
                         href: "https://github.com/acme-sky/docs",
                         label: "GitHub",
                         position: "right",
