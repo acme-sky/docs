@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkacme_sky_docs=self.webpackChunkacme_sky_docs||[]).push([[634],{3562:(e,c,n)=>{n.r(c),n.d(c,{default:()=>a});n(6540);var l=n(2303),r=n(4848);function s(e){let{children:c,fallback:n}=e;return(0,l.A)()?(0,r.jsx)(r.Fragment,{children:c?.()}):n??null}function a(){return(0,r.jsx)(s,{children:()=>{window.location.href="/docs"}})}}}]);
