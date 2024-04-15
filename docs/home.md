@@ -5,5 +5,5 @@ slug: /
 
 # Home
 
-This repository refers to the documentation of a [Service - Oriented Software Engineering course](https://www.unibo.it/en/teaching/course-unit-catalogue/course-unit/2023/479037)
-at the [University of Bologna](https://www.unibo.it).
+Questa repository si riferisce alla documentazione del corso [Ingegneria del Software Orientata ai Servizi](https://www.unibo.it/en/teaching/course-unit-catalogue/course-unit/2023/479037) tenuto presso l'[Università di Bologna](https://www.unibo.it).
+

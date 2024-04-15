@@ -66,7 +66,7 @@ const config = {
                 title: "ACME Sky",
                 logo: {
                     alt: "My Site Logo",
-                    src: "img/logo.svg",
+                    src: "img/logo.png",
                 },
                 items: [
                     {
