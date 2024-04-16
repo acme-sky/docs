@@ -5,6 +5,8 @@ slug: /services/
 
 # Servizi
 
+- **[Airline](/services/airline)**. Usato come gestore di una compagnia aerea.
+
 - **[Bank](/services/bank)**. Usato come gateway di un servizio bancario.
 
 - **[Rent](/services/rent)**. Usato per gestire le compagnie di taxi.
