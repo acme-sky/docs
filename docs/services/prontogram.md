@@ -21,8 +21,23 @@ N.B. per l'utilizzo dell'interfaccia ```Database``` di Jolie è necessario anche
 
 Il ```docker-compose.yml``` è in grado di effettuare il setup del database in maniera automatica, basta eseguire il comando ```docker compose up``` nella directory del file.
 
-## Set up automatico (docker)
-TODO
+## Set up docker
+E' possibile utilizzare il servizio tramite il ```docker-compose.yml``` fornito nella home della repository.
+Per fare ciò è necessario innanzitutto creare il file ```config.json``` nella root del progetto che si occupa della connessione al database, del quale viene fornito un template.
+```JSON
+{
+"database": {
+        "username": "db_user_username",
+        "password": "db_user_password",
+        "host": "container_name",
+        "database": "database_name",
+        "driver": "postgresql" #DON'T CHANGE UNLESS YOU WANT TO USE A DIFFERENT DATABASE
+    }
+}
+```
+Successivamente va buildata l'immagine con il ```Dockerfile``` fornito sempre nella root del progetto. (E' possibile buildare direttamente con ```docker compose build``` utilizzando il ```docker-compose.yml```).
+Infine, ```docker compose up```, il server sarà disponibile a ```localhost:8000```.
+
 
 ## API
 Il servizio offre una API di tipo REST che permette di effettuare le operazioni di login, registrazione di un utente, log dei messaggi, invio di un messaggio e logout.
