@@ -48,7 +48,7 @@ Gestione degli aeroporti. Solo gli utenti possono gestirli.
 ### /v1/flights/
 
 Gestione dei voli. Solo gli utenti possono gestirli. I privati filtrare i voli
-in base ai campi `departaure_time`, `arrival_time`, `departaure_airport_id` e
+in base ai campi `departure_time`, `arrival_time`, `departure_airport_id` e
 `arrival_airport_id`.
 
 ### /v1/hooks/
