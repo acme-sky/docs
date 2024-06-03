@@ -5,30 +5,23 @@ slug: /services/bank
 
 # Bank
 
-Servizio usato come gateway di pagamenti. Rircorda molto l'uso del noto servizio
-online [PayPal](https://paypal.com) in cui un servizio terzo può creare una
-richiesta di pagamento che poi un utente può completare usando un account
-associato.
+Il servizio Bank funge da gateway di pagamenti per ACMESky, simile al noto servizio online [PayPal](https://paypal.com). Consente a un servizio terzo di creare una richiesta di pagamento che può essere completata da un utente utilizzando un account associato, senza la necessità che l'utente pagante sia registrato.
 
-A differenza del servizio online sopracitato, Acmebank, non richiede che l'utente pagante sia registrato.
+È composto da due parti:
+
+1. **API**: Una REST API scritta in OCaml che espone endpoint accessibili solo ai possessori di un `API-TOKEN`, nonché endpoint pubblici come quello per la conferma del pagamento.
+
+2. **Frontend**: Realizzato in Vue.js, il frontend consiste in una single-page mostrata all'utente per completare il pagamento inserendo i dati della propria carta di credito. Il link alla pagina è generato da Bank durante la creazione del pagamento da parte di ACMESky.
 
 ## Set up
 
-Il servizio è diviso in due:
+Qui di seguito viene riportato uno snippet per la build del progetto:
 
-1. **API**. REST API scritta in OCaml la quale espone degli endpoint disponibili
-   solo per i possessori di un `API-TOKEN` ed altri pubblici, come ad esempio,
-   quello della conferma pagamento.
+```bash
+# Clonare il repository
+git clone git@github.com:acme-sky/bank-service.git
+cd bank-service
 
-2. **Frontend**. Scritto in Vue.js, è composto da una single-page mostrata
-   all'utente che deve completare il pagamento inserendo i dati della propria
-   carta di credito. Il link alla pagina è generato da Acmebank in fase di
-   creazione di pagamento da parte di Acmesky.
-
-Si può usare un file nella repository per creare una build del progetto, ma qui
-di seguito viene riportato uno snippet.
-
-```sh
 export POSTGRES_USER="$pg_user"
 export POSTGRES_PASSWORD="$pg_pass"
 export POSTGRES_DB="$pg_db"
@@ -41,27 +34,27 @@ docker build -t acmesky-bankservice-ui --build-arg VITE_BACKEND_URL="$bank_api" 
 docker compose up
 ```
 
-Si vede come il servizio di frontend debba essere collegato all'API mediante una
-variabile d'ambiente usata come argomento di build. Inoltre, l'host del database
-è lasciato, di default, col nome dell'immagine messa _up_ da Docker compose.
+Durante la build del frontend, puoi passare l'URL dell'API come argomento, utilizzando una variabile d'ambiente. In questo modo, il frontend sarà in grado di comunicare correttamente con l'API.
+
 
 ## API
 
 ![Swagger screenshot](/img/swagger-acmebank.png)
 
-### POST /payments/
+### /payments/
 
 Questa chiamata usa l'`API Token` header `X-API-TOKEN` e crea un nuovo pagamento.
 
 Request:
 
 ```json
+curl -X POST http://localhost:8080/payments/ -H 'x-api-token: token' -H 'content-type: application/json' -d '\
 {
   "owner": "Mario Rossi",
   "amount": 42.1,
   "description": "Flight to CPH",
   "callback": "http://acmesky.cs.unibo.it/api/pay/42/"
-}
+}'
 ```
 
 Response:
@@ -78,11 +71,21 @@ Response:
 }
 ```
 
-### GET /payments/\<id\>/
+### /payments/\<id\>/
 
 Lo stesso response di sopra:
 
 ```json
+curl http://localhost:8080/payments/bc7676ac-1a23-4ca9-98dc-462c7036de36/
+
+HTTP/1.1 200 OK
+Access-Control-Allow-Headers: Content-Type
+Access-Control-Allow-Methods: OPTIONS, GET, HEAD, POST
+Access-Control-Allow-Origin: *
+Access-Control-Max-Age: 86400
+Allow: OPTIONS, GET, HEAD, POST
+Content-Length: 215
+Content-Type: application/json
 {
     "id": "23db02df-dda6-4897-9391-5767b262a88c",
     "owner": "John Doe",
@@ -94,19 +97,15 @@ Lo stesso response di sopra:
 }
 ```
 
-### POST /payments/\<id\>/pay/
+### /payments/\<id\>/pay/
 
-Chiamata usata per pagare. Esso cambia lo stato di `paid` a `true`.
+Chiamata usata per pagare. Esso cambia lo stato di `paid = false` a `paid = true`.
 
 ## Frontend
 
 ![Screenshot frontend](https://raw.githubusercontent.com/acme-sky/bank-service/main/assets/screenshot.png)
 
-Il frontend è la pagina principale in cui vengono richieste le informazioni
-della carta di credito per procedere al pagamento.
-
-In realtà i dati della carta vengono ignorati perché non usati realmente nel
-pagamento.
+Il frontend richiede le informazioni della carta di credito, ma queste informazioni non vengono effettivamente utilizzate nel processo di pagamento. In questo caso, il frontend funge principalmente da interfaccia utente per avviare il processo di pagamento.
 
 
 ## Codice sorgente

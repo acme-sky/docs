@@ -5,23 +5,22 @@ slug: /services/rent
 
 # Rent
 
-Al contrario di quello che potrebbe sembrare, questo servizio fa riferimento ad
-un servizio di taxi, o meglio, di car sharing.
+Il servizio "Rent" è un componente fondamentale dell'ecosistema ACMESky. Contrariamente alle aspettative, questo servizio non è un sistema di noleggio di veicoli, bensì fa riferimento a un servizio di taxi o car sharing simile a piattaforme famose come Uber o Bolt.
 
-È usato da ACMESky, in caso di viaggi con costo superiore ai 1000€, per
-prenotare un transfer per l'utente da casa all'areoporto.
+ACMESky utilizza il servizio "Rent" per garantire un'esperienza completa ai suoi utenti durante il processo di prenotazione dei viaggi. In particolare, il servizio viene attivato quando il costo di un viaggio supera la soglia dei 1000€. In queste circostanze, ACMESky prenota automaticamente un trasferimento per l'utente dalla propria residenza all'aeroporto di partenza del viaggio.
+
 
 ## Set up
 
 Rent è un'API SOAP scritta in [Jolie](https://www.jolie-lang.org). Per avviare
-il server bisogna prima generare yn servizi per un dato `namespace`.
+il server bisogna prima generare un servizio per un dato `namespace`.
 
 ```shell
 jolie2wsdl --namespace <namespace> --portName RentPort --portAddr <portaddr> --outputFile <file.wsdl> server.ol
 ```
 
 Ad esempio, per un possibile `uber.acmesky.cs.unibo.it` simile al noto servizio
-[Uber](https://www.uber.com/it/it/) che gira nella porta locale `8080` avremmo:
+[Uber](https://www.uber.com/it/it/) che gira nella porta locale `8080` potremmo avere:
 
 ```
 jolie2wsdl --namespace uber.acmesky.cs.unibo.it --portName RentPort --portAddr http://localhost:8080 --outputFile uber-acmesky.wsdl server.ol
@@ -35,7 +34,7 @@ specificando:
     "location": "socket://localhost:8080",
     "proto": {
         "$": "soap",
-        "wsdl": "./uber-acmesky.wsdl"
+        "wsdl": "/etc/data/uber-acmesky.wsdl"
     },
     "database": {
         "username": "username",
@@ -47,8 +46,49 @@ specificando:
 ```
 
 Dal file di configurazione di Docker compose si vede come la cartella corrente
-venga mappata automaticamente nel volume in `/etc/data`. Dunque, il WSDL, in
-produzione, sarebbe qualcosa del tipo `/etc/data/uber-acmesky.wsdl`.
+venga mappata automaticamente nel volume in `/etc/data`. Dunque, il WSDL in
+produzioneu sarà `/etc/data/uber-acmesky.wsdl`.
+
+Bisogna inoltre mettere _up_ un servizio di webserver per esporre il WSDL online
+così da poter essere richiamato dal Worker di ACMESky.
+
+La build può proseguire con:
+
+1. Build del servizio di Rent.
+
+```
+$ docker build -t acmesky-rentservice .
+```
+
+2. File WSDL in cartella statica.
+
+```
+$ mkdir www
+$ copy uber-acmesky.wsdl www
+```
+
+3. Creazione di config per il webserver Leonardo.
+
+```
+# config-leonardo.json
+{
+    "location": "<location>",
+    "documentDir": "/etc/data/www/"
+}
+```
+
+4. Build del servizio Leonardo.
+
+```
+$ docker build -t acmesky-rentleonardo -f Dockerfile-leonardo .
+```
+
+Infine grazie a Docker compose si possono mettere entrambi i servizi _up_.
+
+```
+$ docker compose up
+```
+
 
 ## API
 
@@ -58,7 +98,6 @@ produzione, sarebbe qualcosa del tipo `/etc/data/uber-acmesky.wsdl`.
 - La richiesta è del tipo `RentRequest`.
 ```
 type RentRequest: void {
-     .CustomerSurname[1,1]: string
      .PickupAddress[1,1]: string
      .Address[1,1]: string
      .CustomerName[1,1]: string
@@ -84,7 +123,6 @@ Un test può essere fatto dal seguente payload:
    <soapenv:Body>
       <rent:BookRent>
          <CustomerName>Mario</CustomerName>
-         <CustomerSurname>Rossi</CustomerSurname>
          <PickupAddress>Via Zamboni 33, Bologna</PickupAddress>
          <Address>Mura Anteo Zamboni 7, Bologna</Address>
          <PickupDate>2024-03-02T13:10:00Z</PickupDate>
@@ -92,6 +130,7 @@ Un test può essere fatto dal seguente payload:
    </soapenv:Body>
 </soapenv:Envelope>
 ```
+
 
 ## Codice sorgente
 
