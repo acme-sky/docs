@@ -1,5 +1,5 @@
 ---
-sidebar_position: 2
+sidebar_position: 3
 slug: /services/
 ---
 
@@ -13,4 +13,7 @@ slug: /services/
 
 - **[Geodistance](/services/geodistance)**. Usato per ritrovare la distanza in metri tra due
   punti nello spazio.
+
+- **[Prontogram](/services/prontogram)**. Usato come sistema di messaggistica.
+
 
