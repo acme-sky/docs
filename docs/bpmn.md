@@ -17,7 +17,7 @@ Nel diagramma BPMN progettato sono presenti diversi partecipanti che rappresenta
 Il partecipante **User** rappresenta l'utente finale del sistema. Questo partecipante è eseguibile e avvia specifiche azioni nel processo, come esprimere un nuovo interesse o avviare un processo di conferma del token di un viaggio.
 
 ### ACMESky
-Il partecipante **ACMESky** è suddiviso in tre sotto-parti, chiamate "lame", ognuna delle quali gestisce una specifica funzionalità del sistema:
+Il partecipante **ACMESky** è suddiviso in tre sotto-parti, chiamate "lane", ognuna delle quali gestisce una specifica funzionalità del sistema:
 1. **Profilo utente**: Gestisce le operazioni relative al profilo dell'utente, inclusa l'espressione di nuovi interessi e la conferma dei token di viaggio.
 2. **Manager degli interessi**: Gestisce gli interessi espressi dagli utenti. Questa pool è attivata unicamente da eventi di Timer catch.
 3. **Manager dei voli**: Gestisce le informazioni sui voli disponibili. Anche questa pool è attivata solo da eventi di Timer catch ma anche da hook del servizio di Airline.
