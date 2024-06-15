@@ -18,6 +18,7 @@ slug: /choreos/
 | User                | USER<sub>x</sub> | Indica l'x-esimo utente                 |
 
 
+### Coreografie globali
 ```JS
 
 // Registrazione interesse dell'utente (ripetuta per tutti gli  utenti)
@@ -116,13 +117,13 @@ slug: /choreos/
                     )
                   )
                 )
-              ) ; // chiusura rent service
+              ) ;
                 // SendJourneyReceipt: resoconto complessivo inviato all'utente
                 SendJourneyReceipt: ACME -> USERₓ;
             )
           ) 
         )
-      ) //chiusura book tickets
+      )
     )
 )*
 ```
