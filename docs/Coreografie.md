@@ -11,7 +11,7 @@ slug: /choreos/
 | - | - | - |
 | ACME                | ACME             | Indica l'azienda AcmeSky                |
 | Airline service     | AIR<sub>k</sub>  | Indica la k-esima compagnia aerea       |
-| Rental service      | RENT<sub>t</sub> | Indica la t-esima compagnia di noleggio |
+| Rent service      | RENT<sub>t</sub> | Indica la t-esima compagnia di noleggio |
 | Prontogram          | PTG              | Indica il servizio di messagistica      |
 | Bank service        | BANK             | Indica il servizio bancario             |
 | Geodistance service | GEO              | Indica il servizio di calcolo distanze  |
