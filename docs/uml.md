@@ -5,4 +5,4 @@ slug: /uml/
 
 # Diagrammi UML
 
-
+![UML Rent](/img/UML_rent.PNG)
