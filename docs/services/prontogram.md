@@ -134,3 +134,9 @@ main{
 che si occupa della gestione dei dati in ingresso quando vengono effettuate le chiamate di login, register. 
 
 Come si evince dal codice queste vengono inviate in formato JSON da un client all'interno dell'header ```credentials```, seguendo la nomenclatura dei custom types sopra illustrati.
+
+## Codice sorgente
+
+Il server, scritto in Jolie, è presente alla seguente [repository Github](https://github.com/acme-sky/prontogram).
+
+Il frontend, scritto tramite l'utilizzo del framework React, è presente alla seguente [repository Github](https://github.com/acme-sky/prontogram-frontend).
