@@ -221,9 +221,9 @@ proj(confirmOffer, USERₓ) =
           ( 1 ; 1 ; 1 ; paymentLink@ACME ; payment@BANK ;
             (
               (
-                1 ;
-                ( 1 + ( 1 ; 1 ;
-                  ( 1 + (( 1 ; 1)* ; 1 ; 1 ; 1 ; 1 ))
+                1 ; //successPaymentBank: BANK ->ACME
+                ( 1 + ( 1 ; 1 ; //req distance
+                  ( 1 + (( 1 ; 1)* ; 1 ; 1 ;))
                 ))
               )
             )
@@ -237,7 +237,7 @@ proj(confirmOffer, USERₓ) =
 #### Airline service
 
 ```JS
-proj(QueryDeiVoli, AIRₖ) = 
+proj(QueryFlights, AIRₖ) = 
                         _______________
   ( queryFlights@ACME ; responseFlights@ACME )*
 ```
@@ -284,7 +284,7 @@ proj(buyOffer, AIRₖ) =
 #### Prontogram
 
 ```JS
-proj(QueryDeiVoli, PTG) = 
+proj(QueryFlights, PTG) = 
   ( 1 ; 1 )*
 ```
 ```JS
@@ -330,7 +330,7 @@ proj(buyOffer, PTG) =
 #### Bank service
 
 ```JS
-proj(QueryDeiVoli, BANK) = 
+proj(QueryFlights, BANK) = 
   ( 1 ; 1 )*
 ```
 ```JS
@@ -377,7 +377,7 @@ proj(buyOffer, BANK) =
 #### Geographical Distance service
 
 ```JS
-proj(QueryDeiVoli, GEO) = 
+proj(QueryFlights, GEO) = 
   ( 1 ; 1 )*
 ```
 ```JS
@@ -423,7 +423,7 @@ proj(buyOffer, GEO) =
 #### Rent Service
 
 ```JS
-proj(QueryDeiVoli, RENTₜ) = 
+proj(QueryFlights, RENTₜ) = 
   ( 1 ; 1 )*
 ```
 ```JS
