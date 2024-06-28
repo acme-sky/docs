@@ -325,19 +325,17 @@ proj(confirmOffer, RENTₜ) =
         (
           ( 1 ; 1 ; 1 ; 1 ;
             (
-              ( 
-                ( 1 + ( 1 ; 1 ;  
-                  ( 1 + (( 1 ; 1)* ; 
-                                                _____________________
-                    requestRentDeparture@ACME ; responseRentDeparture@ACME ;
-                                             __________________
-                    requestRentReturn@ACME ; responseRentReturn@ACME ))
-                ))
-              ) + ( 1 ; 1 )
-            )
-          ) + ( 1 ; 1 )
+              ( 1 ; 1 ;  
+                ( 1 + ( ( 1 ; 1 )*; 
+                                             ____________
+                          requestRent@ACME ; responseRent@ACME ;
+                    )
+                )
+              )
+            );
+          ) + 1
         )
-      ) + 1
+      ) 
     )
   )*
 ```
