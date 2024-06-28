@@ -119,15 +119,360 @@ slug: /choreos/
                 )
               ) ;
                 // SendJourneyReceipt: resoconto complessivo inviato all'utente
-                SendJourneyReceipt: ACME -> USERₓ;
+              SendJourneyReceipt: ACME -> USERₓ;
             )
           ) 
         )
       )
     )
+  )
 )*
 ```
 
 
 
 ### Proiezioni
+
+#### ACMEsky
+
+```JS
+proj(FlightQuery, ACME) = 
+    ____________
+  ( queryFlights@AIRₖ ; responseFlights@AIRₖ )*
+```
+```JS
+proj(ReceiveLastMinute, ACME) = 
+                          __________________
+  ( sendLastMinute@AIRₖ ; repsponseLastMinute@AIRₖ )*
+```
+```JS
+proj(RegisterInterest, ACME) = 
+                            ________________
+  ( requestInterest@USERₓ ; responseInterest@USERₓ )*
+```
+```JS
+proj(SendOffer, ACME) = 
+    __________
+  ( offer@PTG ; 1 ; 1 ; messageSent@PTG )*
+```
+```JS
+proj(RichiestaRicevuta, ACME) = 
+                       _______
+  ( getInvoice@USERₓ ; invoice@USERₓ )*
+```
+```JS
+proj(AcquistoOfferta, ACME) = 
+  ( confirmOffer@USERₓ ; 
+    (                                                     ___________
+      (responseOfferOk@USERₓ ; requestPaymentLink@USERₓ ; bookTickets@AIRₖ
+        (
+          ( 
+            responseTickets@AIRₖ ;
+            ______________
+            requestBankLink@BANK ; responselink@BANK ;
+            ___________
+            paymentLink@USERₓ ; 1 ;
+            (
+              (
+                successPaymentBank@BANK ;
+                        _______________
+                ( 1 + ( requestDistance@GEO ; responseDistance@GEO ;
+                            ___________________
+                  ( 1 + ( ( requestDistanceRent@GEO ; responseDistanceRent@GEO )* ;
+                    ____________________
+                    requestRentDeparture@RENTₜ ; responseRentDeparture@RENTₜ ;
+                    _________________
+                    requestRentReturn@RENTₜ ; responseRentReturn@RENTₜ
+                  ) )
+                ) ) _____________        __________
+              ) + ( unbookTickets@AIRₖ ; emitCoupon@BANK )
+            )
+                                  ____________
+          ) + flightNotFound@AIRₖ errorTickets@USERₓ 
+        )
+          __________________
+      ) + responseOfferError@USERₓ
+    )
+  )*
+```
+
+#### Utente
+
+```JS
+proj(QueryDeiVoli, USERₓ) = 
+  ( 1 ; 1 )*
+```
+```JS
+proj(RicezioneOfferteLastMinute, USERₓ) = 
+  ( 1 ; 1 )*
+```
+```JS
+proj(RegistrazioneInteresse, USERₓ) = 
+    _______________
+  ( requestInterest@ACME ; responseInterest@ACME )*
+```
+```JS
+proj(NotificaOfferta, USERₓ) = 
+                         ______________
+  ( 1 ; notifyUser@PTG ; notifyResponse@PTG ; 1 )*
+```
+```JS
+proj(RichiestaRicevuta, USERₓ) = 
+    __________
+  ( getInvoice@ACME ; invoice@ACME )*
+```
+```JS
+proj(AcquistoOfferta, USERₓ) = 
+    ____________
+  ( confirmOffer@ACME ; 
+    (                          __________________
+      ( responseOfferOk@ACME ; requestPaymentLink@ACME ; 1 ;
+        (
+          ( 1 ; 1 ; 1 ; paymentLink@ACME ; payment@BANK ;
+            (
+              (
+                1 ;
+                ( 1 + ( 1 ; 1 ;
+                  ( 1 + (( 1 ; 1)* ; 1 ; 1 ; 1 ; 1 ))
+                ))
+              ) + ( 1 ; 1 )
+            )
+          ) + ( 1 ; errorTickets@ACME )
+        )
+      ) + responseOfferError@ACME
+    )
+  )*
+```
+
+#### Airline service
+
+```JS
+proj(QueryDeiVoli, AIRₖ) = 
+                        _______________
+  ( queryFlights@ACME ; responseFlights@ACME )*
+```
+```JS
+proj(RicezioneOfferteLastMinute, AIRₖ) = 
+    ______________
+  ( sendLastMinute@ACME ; repsponseLastMinute@ACME )*
+```
+```JS
+proj(RegistrazioneInteresse, AIRₖ) = 
+  ( 1 ; 1 )*
+```
+```JS
+proj(NotificaOfferta, AIRₖ) = 
+  ( 1 ; 1 ; 1 ; 1 )*
+```
+```JS
+proj(RichiestaRicevuta, AIRₖ) =
+  ( 1 ; 1 )*
+```
+```JS
+proj(AcquistoOfferta, AIRₖ) =
+  ( 1 ; 
+    (
+      (1 ; 1 ; bookTickets@ACME ;
+        (
+          ( _______________
+            responseTickets@ACME ;
+            1 ; 1 ; 1 ; 1 ;
+            (
+              ( 1 ;
+                ( 1 + ( 1 ; 1 ;
+                  ( 1 + (( 1 ; 1)* ; 1 ; 1 ; 1 ; 1 ))
+                ))
+              ) + ( unbookTickets@ACME ; 1 )
+            )   _______________
+          ) + ( responseTickets@ACME ; 1 )
+        )
+      ) + 1
+    )
+  )*
+```
+
+#### Prontogram
+
+```JS
+proj(QueryDeiVoli, PTG) = 
+  ( 1 ; 1 )*
+```
+```JS
+proj(RicezioneOfferteLastMinute, PTG) =
+  ( 1 ; 1 )*
+```
+```JS
+proj(RegistrazioneInteresse, PTG) = 
+  ( 1 ; 1 )*
+```
+```JS
+proj(NotificaOfferta, PTG) = 
+                      __________
+  ( offerToken@ACME ; notifyUser@USERₓ ; 
+                           _____________
+    notifyResponse@USERₓ ; messageSended@ACME )*
+```
+```JS
+proj(RichiestaRicevuta, PTG) =
+  ( 1 ; 1 )*
+```
+```JS
+proj(AcquistoOfferta, PTG) = 
+  ( 1 ; 
+    (
+      ( 1 ; 1 ; 1 ;
+        (
+          ( 1 ; 1 ; 1 ; 1 ; 1 ;
+            (
+              ( 1 ;
+                ( 1 + ( 1 ; 1 ;
+                  ( 1 + (( 1 ; 1)* ; 1 ; 1 ; 1 ; 1 ))
+                ))
+              ) + ( 1 ; 1 )
+            )
+          ) + ( 1 ; 1 )
+        )
+      ) + 1
+    )
+  )*
+```
+
+#### Bank service
+
+```JS
+proj(QueryDeiVoli, BANK) = 
+  ( 1 ; 1 )*
+```
+```JS
+proj(RicezioneOfferteLastMinute, BANK) = 
+  ( 1 ; 1 )*
+```
+```JS
+proj(RegistrazioneInteresse, BANK) = 
+  ( 1 ; 1 )*
+```
+```JS
+proj(NotificaOfferta, BANK) = 
+  ( 1 ; 1 ; 1 ; 1 )*
+```
+```JS
+proj(RichiestaRicevuta, BANK) = 
+  ( 1 ; 1 )*
+```
+```JS
+proj(AcquistoOfferta, BANK) = 
+  ( 1 ; 
+    (
+      ( 1 ; 1 ; 1 ;
+        (
+          (                            ____________
+            1 ; requestBankLink@ACME ; responselink@ACME ; 
+            1 ; payment@USERₓ ;
+            (
+              ( __________________
+                successPaymentBank@ACME ;
+                        _______________
+                ( 1 + ( 1 ; 1 ;
+                  ( 1 + (( 1 ; 1)* ; 1 ; 1 ; 1 ; 1 ))
+                ))
+              ) + ( 1 ; emitCoupon@ACME )
+            )
+          ) + ( 1 ; 1 )
+        )
+      ) + 1
+    )
+  )*
+```
+
+#### Geographical Distance service
+
+```JS
+proj(QueryDeiVoli, GEO) = 
+  ( 1 ; 1 )*
+```
+```JS
+proj(RicezioneOfferteLastMinute, GEO) = 
+  ( 1 ; 1 )*
+```
+```JS
+proj(RegistrazioneInteresse, GEO) = 
+  ( 1 ; 1 )*
+```
+```JS
+proj(NotificaOfferta, GEO) = 
+  ( 1 ; 1 ; 1 ; 1 )*
+```
+```JS
+proj(RichiestaRicevuta, GEO) = 
+  ( 1 ; 1 )*
+```
+```JS
+proj(AcquistoOfferta, GEO) = 
+  ( 1 ; 
+    (
+      ( 1 ; 1 ; 1 ;
+        (
+          ( 1 ; 1 ; 1 ; 1 ; 1 ;
+            (
+              ( 1 ;
+                                               ________________
+                ( 1 + ( requestDistance@ACME ; responseDistance@ACME ;
+                                                      ____________________
+                  ( 1 + (( requestDistanceRent@ACME ; responseDistanceRent@ACME )* ; 
+                    1 ; 1 ; 1 ; 1 ))
+                ))
+              ) + ( 1 ; 1 )
+            )
+          ) + ( 1 ; 1 )
+        )
+      ) + 1
+    )
+  )*
+```
+
+#### Rent Service
+
+```JS
+proj(QueryDeiVoli, RENTₜ) = 
+  ( 1 ; 1 )*
+```
+```JS
+proj(RicezioneOfferteLastMinute, RENTₜ) = 
+  ( 1 ; 1 )*
+```
+```JS
+proj(RegistrazioneInteresse, RENTₜ) = 
+  ( 1 ; 1 )*
+```
+```JS
+proj(NotificaOfferta, RENTₜ) = 
+  ( 1 ; 1 ; 1 ; 1 )*
+```
+```JS
+proj(RichiestaRicevuta, RENTₜ) = 
+  ( 1 ; 1 )*
+```
+```JS
+proj(AcquistoOfferta, RENTₜ) = 
+  ( 1 ; 
+    (
+      ( 1 ; 1 ; 1 ;
+        (
+          ( 1 ; 1 ; 1 ; 1 ; 1 ;
+            (
+              ( 1 ;
+                ( 1 + ( 1 ; 1 ;  
+                  ( 1 + (( 1 ; 1)* ; 
+                                                _____________________
+                    requestRentDeparture@ACME ; responseRentDeparture@ACME ;
+                                             __________________
+                    requestRentReturn@ACME ; responseRentReturn@ACME ))
+                ))
+              ) + ( 1 ; 1 )
+            )
+          ) + ( 1 ; 1 )
+        )
+      ) + 1
+    )
+  )*
+```
