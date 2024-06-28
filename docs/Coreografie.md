@@ -272,47 +272,11 @@ proj(confirmOffer, AIRₖ) =
 #### Prontogram
 
 ```JS
-proj(QueryFlights, PTG) = 
-  ( 1 ; 1 )*
-```
-```JS
-proj(RicezioneOfferteLastMinute, PTG) =
-  ( 1 ; 1 )*
-```
-```JS
-proj(RegistrazioneInteresse, PTG) = 
-  ( 1 ; 1 )*
-```
-```JS
-proj(NotificaOfferta, PTG) = 
+proj(SendOffer, PTG) = 
                       __________
   ( offerToken@ACME ; notifyUser@USERₓ ; 
                            _____________
     notifyResponse@USERₓ ; messageSended@ACME )*
-```
-```JS
-proj(RequestReceipt, PTG) =
-  ( 1 ; 1 )*
-```
-```JS
-proj(confirmOffer, PTG) = 
-  ( 1 ; 
-    (
-      ( 1 ; 1 ; 1 ;
-        (
-          ( 1 ; 1 ; 1 ; 1 ; 1 ;
-            (
-              ( 1 ;
-                ( 1 + ( 1 ; 1 ;
-                  ( 1 + (( 1 ; 1)* ; 1 ; 1 ; 1 ; 1 ))
-                ))
-              ) + ( 1 ; 1 )
-            )
-          ) + ( 1 ; 1 )
-        )
-      ) + 1
-    )
-  )*
 ```
 
 #### Bank service
@@ -330,7 +294,7 @@ proj(RegistrazioneInteresse, BANK) =
   ( 1 ; 1 )*
 ```
 ```JS
-proj(NotificaOfferta, BANK) = 
+proj(SendOffer, BANK) = 
   ( 1 ; 1 ; 1 ; 1 )*
 ```
 ```JS
@@ -377,7 +341,7 @@ proj(RegistrazioneInteresse, GEO) =
   ( 1 ; 1 )*
 ```
 ```JS
-proj(NotificaOfferta, GEO) = 
+proj(SendOffer, GEO) = 
   ( 1 ; 1 ; 1 ; 1 )*
 ```
 ```JS
@@ -423,7 +387,7 @@ proj(RegistrazioneInteresse, RENTₜ) =
   ( 1 ; 1 )*
 ```
 ```JS
-proj(NotificaOfferta, RENTₜ) = 
+proj(SendOffer, RENTₜ) = 
   ( 1 ; 1 ; 1 ; 1 )*
 ```
 ```JS
