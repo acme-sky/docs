@@ -49,13 +49,6 @@ slug: /choreos/
 ( offerToken: ACME -> PTG ; notifyUser: PTG -> USERₓ ; 
   notifyResponse: USERₓ -> PTG ; messageSended: PTG -> ACME )*
 |
-
-// Richiesta ticket
-// getreceipt: mesaagio di richiesta ricevuta dell'offerta pagata
-// receipt: messaggio con la ricevuta del viaggio
-( getreceipt: USERₓ -> ACME ; receipt: ACME -> USERₓ )*
-|
-
 // Conferma dell'offerta e pagamento
 // confirmOffer: messaggio di conferma offerta e pagamento
 ( 
@@ -158,11 +151,6 @@ proj(SendOffer, ACME) =
   ( offer@PTG ; 1 ; 1 ; messageSent@PTG )*
 ```
 ```JS
-proj(RequestReceipt, ACME) = 
-                       _______
-  ( getReceipt@USERₓ ; receipt@USERₓ )*
-```
-```JS
 proj(confirmOffer, ACME) = 
   ( confirmOffer@USERₓ ; 
     (                                                     ___________
@@ -188,7 +176,7 @@ proj(confirmOffer, ACME) =
               )
             )
           )
-        )
+        ) //TODO ADD 1 SOMEWHERE HERE
       )
     )
   )*
@@ -207,11 +195,6 @@ proj(SendOffer, USERₓ) =
   ( 1 ; notifyUser@PTG ; notifyResponse@PTG ; 1 )*
 ```
 ```JS
-proj(RequestReceipt, USERₓ) = 
-    __________
-  ( getReceipt@ACME ; receipt@ACME )*
-```
-```JS
 proj(confirmOffer, USERₓ) = 
     ____________
   ( confirmOffer@ACME ; 
@@ -228,7 +211,7 @@ proj(confirmOffer, USERₓ) =
               )
             )
           )
-        )
+        )//TODO ADD 1
       )
     )
   )*
