@@ -280,27 +280,6 @@ proj(SendOffer, PTG) =
 ```
 
 #### Bank service
-
-```JS
-proj(QueryFlights, BANK) = 
-  ( 1 ; 1 )*
-```
-```JS
-proj(RicezioneOfferteLastMinute, BANK) = 
-  ( 1 ; 1 )*
-```
-```JS
-proj(RegistrazioneInteresse, BANK) = 
-  ( 1 ; 1 )*
-```
-```JS
-proj(SendOffer, BANK) = 
-  ( 1 ; 1 ; 1 ; 1 )*
-```
-```JS
-proj(RequestReceipt, BANK) = 
-  ( 1 ; 1 )*
-```
 ```JS
 proj(confirmOffer, BANK) = 
   ( 1 ; 
@@ -308,18 +287,17 @@ proj(confirmOffer, BANK) =
       ( 1 ; 1 ; 1 ;
         (
           (                            ____________
-            1 ; requestBankLink@ACME ; responselink@ACME ; 
-            1 ; payment@USERₓ ;
+            1 ; requestBankLink@ACME ; responselink@ACME ; 1
             (
-              ( __________________
-                successPaymentBank@ACME ;
-                        _______________
-                ( 1 + ( 1 ; 1 ;
-                  ( 1 + (( 1 ; 1)* ; 1 ; 1 ; 1 ; 1 ))
+              (                __________________
+                payment@USERₓ ;successPaymentBank@ACME ;
+                (
+                 1 + ( 1 ; 1 ;
+                  ( 1 + (( 1 ; 1)* ; 1 ; 1))
                 ))
-              ) + ( 1 ; emitCoupon@ACME )
+              )
             )
-          ) + ( 1 ; 1 )
+          )
         )
       ) + 1
     )
