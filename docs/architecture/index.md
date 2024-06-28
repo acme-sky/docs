@@ -83,6 +83,19 @@ Le tabelle presenti nel database sono le seguenti:
  user_id      | bigint                   |           |          |
 ```
 
+- `rents`
+
+```
+   Column   |           Type           | Collation | Nullable |              Default
+------------+--------------------------+-----------+----------+-----------------------------------
+ id         | bigint                   |           | not null | nextval('rents_id_seq'::regclass)
+ created_at | timestamp with time zone |           |          |
+ name       | text                     |           |          |
+ latitude   | numeric                  |           |          |
+ longitude  | numeric                  |           |          |
+ endpoint   | text                     |           |          |
+```
+
 - `users`
 
 ```
