@@ -202,22 +202,22 @@ proj(RegisterInterest, USERₓ) =
   ( requestInterest@ACME ; responseInterest@ACME )*
 ```
 ```JS
-proj(NotificaOfferta, USERₓ) = 
+proj(SendOffer, USERₓ) = 
                          ______________
   ( 1 ; notifyUser@PTG ; notifyResponse@PTG ; 1 )*
 ```
 ```JS
 proj(RequestReceipt, USERₓ) = 
     __________
-  ( getreceipt@ACME ; receipt@ACME )*
+  ( getReceipt@ACME ; receipt@ACME )*
 ```
 ```JS
-proj(buyOffer, USERₓ) = 
+proj(confirmOffer, USERₓ) = 
     ____________
   ( confirmOffer@ACME ; 
     (                          __________________
       ( responseOfferOk@ACME ; requestPaymentLink@ACME ; 1 ;
-        (
+        (                                  _______
           ( 1 ; 1 ; 1 ; paymentLink@ACME ; payment@BANK ;
             (
               (
@@ -225,11 +225,11 @@ proj(buyOffer, USERₓ) =
                 ( 1 + ( 1 ; 1 ;
                   ( 1 + (( 1 ; 1)* ; 1 ; 1 ; 1 ; 1 ))
                 ))
-              ) + ( 1 ; 1 )
+              )
             )
-          ) + ( 1 ; errorTickets@ACME )
+          )
         )
-      ) + responseOfferError@ACME
+      )
     )
   )*
 ```
