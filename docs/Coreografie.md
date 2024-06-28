@@ -37,8 +37,8 @@ slug: /choreos/
 // Ricezione offerte last minute (ripetuta per tutte le compagnie aeree)
 // Viene ripetuta per ogni compagnia aerea collegata ad ACMEsky
 // sendLastMinute: invia le offerte last minute
-// repsponseLastMinute: risposta successo o fallimento
-( sendLastMinute: AIRₖ -> ACME ; repsponseLastMinute: ACME -> AIRₖ )*
+// responseLastMinute: risposta successo o fallimento
+( sendLastMinute: AIRₖ -> ACME ; responseLastMinute: ACME -> AIRₖ )*
 |
 
 // Notifica dell'offerta all'utente
@@ -145,7 +145,7 @@ proj(FlightQuery, ACME) =
 ```JS
 proj(ReceiveLastMinute, ACME) = 
                           __________________
-  ( sendLastMinute@AIRₖ ; repsponseLastMinute@AIRₖ )*
+  ( sendLastMinute@AIRₖ ; responseLastMinute@AIRₖ )*
 ```
 ```JS
 proj(RegisterInterest, ACME) = 
@@ -242,39 +242,27 @@ proj(QueryFlights, AIRₖ) =
   ( queryFlights@ACME ; responseFlights@ACME )*
 ```
 ```JS
-proj(RicezioneOfferteLastMinute, AIRₖ) = 
+proj(sendLastMinute, AIRₖ) = 
     ______________
-  ( sendLastMinute@ACME ; repsponseLastMinute@ACME )*
+  ( sendLastMinute@ACME ; responseLastMinute@ACME )*
 ```
 ```JS
-proj(RegistrazioneInteresse, AIRₖ) = 
-  ( 1 ; 1 )*
-```
-```JS
-proj(NotificaOfferta, AIRₖ) = 
-  ( 1 ; 1 ; 1 ; 1 )*
-```
-```JS
-proj(RequestReceipt, AIRₖ) =
-  ( 1 ; 1 )*
-```
-```JS
-proj(buyOffer, AIRₖ) =
+proj(confirmOffer, AIRₖ) =
   ( 1 ; 
     (
       (1 ; 1 ; bookTickets@ACME ;
         (
           ( _______________
             responseTickets@ACME ;
-            1 ; 1 ; 1 ; 1 ;
+            1 ; 1 ; 1 ;
             (
-              ( 1 ;
-                ( 1 + ( 1 ; 1 ;
-                  ( 1 + (( 1 ; 1)* ; 1 ; 1 ; 1 ; 1 ))
-                ))
-              ) + ( unbookTickets@ACME ; 1 )
-            )   _______________
-          ) + ( responseTickets@ACME ; 1 )
+              ( 1; 1 ;
+                ( 1 + ( 1 ; 1 ;)*
+                  (1 ; 1 )
+                )
+              )
+            ) 
+          ) 
         )
       ) + 1
     )
@@ -307,7 +295,7 @@ proj(RequestReceipt, PTG) =
   ( 1 ; 1 )*
 ```
 ```JS
-proj(buyOffer, PTG) = 
+proj(confirmOffer, PTG) = 
   ( 1 ; 
     (
       ( 1 ; 1 ; 1 ;
@@ -350,7 +338,7 @@ proj(RequestReceipt, BANK) =
   ( 1 ; 1 )*
 ```
 ```JS
-proj(buyOffer, BANK) = 
+proj(confirmOffer, BANK) = 
   ( 1 ; 
     (
       ( 1 ; 1 ; 1 ;
@@ -397,7 +385,7 @@ proj(RequestReceipt, GEO) =
   ( 1 ; 1 )*
 ```
 ```JS
-proj(buyOffer, GEO) = 
+proj(confirmOffer, GEO) = 
   ( 1 ; 
     (
       ( 1 ; 1 ; 1 ;
@@ -443,7 +431,7 @@ proj(RequestReceipt, RENTₜ) =
   ( 1 ; 1 )*
 ```
 ```JS
-proj(buyOffer, RENTₜ) = 
+proj(confirmOffer, RENTₜ) = 
   ( 1 ; 
     (
       ( 1 ; 1 ; 1 ;
