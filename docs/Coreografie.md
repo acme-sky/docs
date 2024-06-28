@@ -51,9 +51,9 @@ slug: /choreos/
 |
 
 // Richiesta ticket
-// getInvoice: mesaagio di richiesta ricevuta dell'offerta pagata
-// invoice: messaggio con la ricevuta del viaggio
-( getInvoice: USERₓ -> ACME ; invoice: ACME -> USERₓ )*
+// getreceipt: mesaagio di richiesta ricevuta dell'offerta pagata
+// receipt: messaggio con la ricevuta del viaggio
+( getreceipt: USERₓ -> ACME ; receipt: ACME -> USERₓ )*
 |
 
 // Conferma dell'offerta e pagamento
@@ -133,6 +133,8 @@ slug: /choreos/
 
 ### Proiezioni
 
+Nella sezione seguente vengono descritte solamente le proiezioni considerante significative per i rispettivi ruoli / attori.
+
 #### ACMEsky
 
 ```JS
@@ -156,12 +158,12 @@ proj(SendOffer, ACME) =
   ( offer@PTG ; 1 ; 1 ; messageSent@PTG )*
 ```
 ```JS
-proj(RichiestaRicevuta, ACME) = 
+proj(RequestReceipt, ACME) = 
                        _______
-  ( getInvoice@USERₓ ; invoice@USERₓ )*
+  ( getReceipt@USERₓ ; receipt@USERₓ )*
 ```
 ```JS
-proj(AcquistoOfferta, ACME) = 
+proj(confirmOffer, ACME) = 
   ( confirmOffer@USERₓ ; 
     (                                                     ___________
       (responseOfferOk@USERₓ ; requestPaymentLink@USERₓ ; bookTickets@AIRₖ
@@ -180,18 +182,14 @@ proj(AcquistoOfferta, ACME) =
                             ___________________
                   ( 1 + ( ( requestDistanceRent@GEO ; responseDistanceRent@GEO )* ;
                     ____________________
-                    requestRentDeparture@RENTₜ ; responseRentDeparture@RENTₜ ;
-                    _________________
-                    requestRentReturn@RENTₜ ; responseRentReturn@RENTₜ
+                    requestRent@RENTₜ ; responseRent@RENTₜ ;
                   ) )
-                ) ) _____________        __________
-              ) + ( unbookTickets@AIRₖ ; emitCoupon@BANK )
+                ) )
+              )
             )
-                                  ____________
-          ) + flightNotFound@AIRₖ errorTickets@USERₓ 
+          )
         )
-          __________________
-      ) + responseOfferError@USERₓ
+      )
     )
   )*
 ```
@@ -199,15 +197,7 @@ proj(AcquistoOfferta, ACME) =
 #### Utente
 
 ```JS
-proj(QueryDeiVoli, USERₓ) = 
-  ( 1 ; 1 )*
-```
-```JS
-proj(RicezioneOfferteLastMinute, USERₓ) = 
-  ( 1 ; 1 )*
-```
-```JS
-proj(RegistrazioneInteresse, USERₓ) = 
+proj(RegisterInterest, USERₓ) = 
     _______________
   ( requestInterest@ACME ; responseInterest@ACME )*
 ```
@@ -217,12 +207,12 @@ proj(NotificaOfferta, USERₓ) =
   ( 1 ; notifyUser@PTG ; notifyResponse@PTG ; 1 )*
 ```
 ```JS
-proj(RichiestaRicevuta, USERₓ) = 
+proj(RequestReceipt, USERₓ) = 
     __________
-  ( getInvoice@ACME ; invoice@ACME )*
+  ( getreceipt@ACME ; receipt@ACME )*
 ```
 ```JS
-proj(AcquistoOfferta, USERₓ) = 
+proj(buyOffer, USERₓ) = 
     ____________
   ( confirmOffer@ACME ; 
     (                          __________________
@@ -265,11 +255,11 @@ proj(NotificaOfferta, AIRₖ) =
   ( 1 ; 1 ; 1 ; 1 )*
 ```
 ```JS
-proj(RichiestaRicevuta, AIRₖ) =
+proj(RequestReceipt, AIRₖ) =
   ( 1 ; 1 )*
 ```
 ```JS
-proj(AcquistoOfferta, AIRₖ) =
+proj(buyOffer, AIRₖ) =
   ( 1 ; 
     (
       (1 ; 1 ; bookTickets@ACME ;
@@ -313,11 +303,11 @@ proj(NotificaOfferta, PTG) =
     notifyResponse@USERₓ ; messageSended@ACME )*
 ```
 ```JS
-proj(RichiestaRicevuta, PTG) =
+proj(RequestReceipt, PTG) =
   ( 1 ; 1 )*
 ```
 ```JS
-proj(AcquistoOfferta, PTG) = 
+proj(buyOffer, PTG) = 
   ( 1 ; 
     (
       ( 1 ; 1 ; 1 ;
@@ -356,11 +346,11 @@ proj(NotificaOfferta, BANK) =
   ( 1 ; 1 ; 1 ; 1 )*
 ```
 ```JS
-proj(RichiestaRicevuta, BANK) = 
+proj(RequestReceipt, BANK) = 
   ( 1 ; 1 )*
 ```
 ```JS
-proj(AcquistoOfferta, BANK) = 
+proj(buyOffer, BANK) = 
   ( 1 ; 
     (
       ( 1 ; 1 ; 1 ;
@@ -403,11 +393,11 @@ proj(NotificaOfferta, GEO) =
   ( 1 ; 1 ; 1 ; 1 )*
 ```
 ```JS
-proj(RichiestaRicevuta, GEO) = 
+proj(RequestReceipt, GEO) = 
   ( 1 ; 1 )*
 ```
 ```JS
-proj(AcquistoOfferta, GEO) = 
+proj(buyOffer, GEO) = 
   ( 1 ; 
     (
       ( 1 ; 1 ; 1 ;
@@ -449,11 +439,11 @@ proj(NotificaOfferta, RENTₜ) =
   ( 1 ; 1 ; 1 ; 1 )*
 ```
 ```JS
-proj(RichiestaRicevuta, RENTₜ) = 
+proj(RequestReceipt, RENTₜ) = 
   ( 1 ; 1 )*
 ```
 ```JS
-proj(AcquistoOfferta, RENTₜ) = 
+proj(buyOffer, RENTₜ) = 
   ( 1 ; 
     (
       ( 1 ; 1 ; 1 ;
