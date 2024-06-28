@@ -299,7 +299,7 @@ proj(confirmOffer, BANK) =
             )
           )
         )
-      ) + 1
+      ) + 1;
     )
   )*
 ```
@@ -307,43 +307,22 @@ proj(confirmOffer, BANK) =
 #### Geographical Distance service
 
 ```JS
-proj(QueryFlights, GEO) = 
-  ( 1 ; 1 )*
-```
-```JS
-proj(RicezioneOfferteLastMinute, GEO) = 
-  ( 1 ; 1 )*
-```
-```JS
-proj(RegistrazioneInteresse, GEO) = 
-  ( 1 ; 1 )*
-```
-```JS
-proj(SendOffer, GEO) = 
-  ( 1 ; 1 ; 1 ; 1 )*
-```
-```JS
-proj(RequestReceipt, GEO) = 
-  ( 1 ; 1 )*
-```
-```JS
 proj(confirmOffer, GEO) = 
   ( 1 ; 
     (
       ( 1 ; 1 ; 1 ;
         (
-          ( 1 ; 1 ; 1 ; 1 ; 1 ;
+          ( 1 ; 1 ; 1 ; 1;
             (
-              ( 1 ;
+              (
                                                ________________
                 ( 1 + ( requestDistance@ACME ; responseDistance@ACME ;
                                                       ____________________
                   ( 1 + (( requestDistanceRent@ACME ; responseDistanceRent@ACME )* ; 
-                    1 ; 1 ; 1 ; 1 ))
                 ))
-              ) + ( 1 ; 1 )
+              )
             )
-          ) + ( 1 ; 1 )
+          )
         )
       ) + 1
     )
