@@ -315,16 +315,19 @@ proj(confirmOffer, GEO) =
           ( 1 ; 1 ; 1 ; 1;
             (
               (
+                1 ; 1;
                                                ________________
-                ( 1 + ( requestDistance@ACME ; responseDistance@ACME ;
-                                                      ____________________
-                  ( 1 + (( requestDistanceRent@ACME ; responseDistanceRent@ACME )* ; 
-                ))
+                  ( 1 + ( requestDistance@ACME ; responseDistance@ACME ;
+                                                        ____________________
+                    ( 1 + (( requestDistanceRent@ACME ; responseDistanceRent@ACME )* ; 
+                  ) 1; 1)
+                )
               )
             )
           )
+        ) + 1
         )
-      ) + 1
+      )
     )
   )*
 ```
@@ -332,34 +335,14 @@ proj(confirmOffer, GEO) =
 #### Rent Service
 
 ```JS
-proj(QueryFlights, RENTₜ) = 
-  ( 1 ; 1 )*
-```
-```JS
-proj(RicezioneOfferteLastMinute, RENTₜ) = 
-  ( 1 ; 1 )*
-```
-```JS
-proj(RegistrazioneInteresse, RENTₜ) = 
-  ( 1 ; 1 )*
-```
-```JS
-proj(SendOffer, RENTₜ) = 
-  ( 1 ; 1 ; 1 ; 1 )*
-```
-```JS
-proj(RequestReceipt, RENTₜ) = 
-  ( 1 ; 1 )*
-```
-```JS
 proj(confirmOffer, RENTₜ) = 
   ( 1 ; 
     (
       ( 1 ; 1 ; 1 ;
         (
-          ( 1 ; 1 ; 1 ; 1 ; 1 ;
+          ( 1 ; 1 ; 1 ; 1 ;
             (
-              ( 1 ;
+              ( 
                 ( 1 + ( 1 ; 1 ;  
                   ( 1 + (( 1 ; 1)* ; 
                                                 _____________________
