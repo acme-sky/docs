@@ -153,7 +153,7 @@ proj(SendOffer, ACME) =
 ```JS
 proj(confirmOffer, ACME) = 
   ( confirmOffer@USERₓ ; 
-    (                                                     ___________
+    (  _______________                                    ___________
       (responseOfferOk@USERₓ ; requestPaymentLink@USERₓ ; bookTickets@AIRₖ
         (
           ( 
@@ -164,19 +164,21 @@ proj(confirmOffer, ACME) =
             paymentLink@USERₓ ; 1 ;
             (
               (
-                successPaymentBank@BANK ;
+                1; successPaymentBank@BANK ;
                         _______________
                 ( 1 + ( requestDistance@GEO ; responseDistance@GEO ;
                             ___________________
                   ( 1 + ( ( requestDistanceRent@GEO ; responseDistanceRent@GEO )* ;
-                    ____________________
+                    ___________
                     requestRent@RENTₜ ; responseRent@RENTₜ ;
-                  ) )
-                ) )
-              )
+                      ) 
+                    )
+                  ); __________________
+                )    SendJourneyReceipt@USERₓ
+              ) 
             )
           )
-        ) //TODO ADD 1 SOMEWHERE HERE
+        )
       )
     )
   )*
@@ -207,11 +209,12 @@ proj(confirmOffer, USERₓ) =
                 1 ; //successPaymentBank: BANK ->ACME
                 ( 1 + ( 1 ; 1 ; //req distance
                   ( 1 + (( 1 ; 1)* ; 1 ; 1 ;))
-                ))
+                  )
+                );  SendJourneyReceipt@ACME
               )
             )
           )
-        )//TODO ADD 1
+        )
       )
     )
   )*
@@ -242,12 +245,12 @@ proj(confirmOffer, AIRₖ) =
               ( 1; 1 ;
                 ( 1 + ( 1 ; 1 ;)*
                   (1 ; 1 )
-                )
+                ) 1 ;
               )
             ) 
           ) 
         )
-      ) + 1
+      )
     )
   )*
 ```
@@ -277,12 +280,12 @@ proj(confirmOffer, BANK) =
                 (
                  1 + ( 1 ; 1 ;
                   ( 1 + (( 1 ; 1)* ; 1 ; 1))
-                ))
+                ))  1 ;
               )
             )
           )
         )
-      ) + 1;
+      )
     )
   )*
 ```
@@ -305,10 +308,10 @@ proj(confirmOffer, GEO) =
                     ( 1 + (( requestDistanceRent@ACME ; responseDistanceRent@ACME )* ; 
                   ) 1; 1)
                 )
-              )
+              )  1 ;
             )
           )
-        ) + 1
+         )
         )
       )
     )
@@ -330,10 +333,10 @@ proj(confirmOffer, RENTₜ) =
                                              ____________
                           requestRent@ACME ; responseRent@ACME ;
                     )
-                )
+                ) 1 ;
               )
-            );
-          ) + 1
+            )
+          )
         )
       ) 
     )

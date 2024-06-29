@@ -135,6 +135,10 @@ che si occupa della gestione dei dati in ingresso quando vengono effettuate le c
 
 Come si evince dal codice queste vengono inviate in formato JSON da un client all'interno dell'header ```credentials```, seguendo la nomenclatura dei custom types sopra illustrati.
 
+## Frontend
+
+TO-DO
+
 ## Codice sorgente
 
 Il server, scritto in Jolie, è presente alla seguente [repository Github](https://github.com/acme-sky/prontogram).
