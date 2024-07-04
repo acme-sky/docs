@@ -96,6 +96,19 @@ Le tabelle presenti nel database sono le seguenti:
  endpoint   | text                     |           |          |
 ```
 
+- `airlines`
+
+```
+     Column     |           Type           | Collation | Nullable |               Default
+----------------+--------------------------+-----------+----------+--------------------------------------
+ id             | bigint                   |           | not null | nextval('airlines_id_seq'::regclass)
+ created_at     | timestamp with time zone |           |          |
+ name           | text                     |           |          |
+ login_username | text                     |           |          |
+ login_password | text                     |           |          |
+ endpoint       | text                     |           |          |
+```
+
 - `users`
 
 ```
