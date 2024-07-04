@@ -27,7 +27,9 @@ const config = {
 
     onBrokenLinks: "throw",
     onBrokenMarkdownLinks: "warn",
-
+    plugins: [
+        'docusaurus-plugin-image-zoom',
+      ],
     // Even if you don't use internationalization, you can use this field to set
     // useful metadata like html lang. For example, if your site is Chinese, you
     // may want to replace "en" with "zh-Hans".
@@ -56,7 +58,6 @@ const config = {
             }),
         ],
     ],
-
     themeConfig:
         /** @type {import('@docs/preset-classic').ThemeConfig} */
         ({
@@ -65,7 +66,7 @@ const config = {
             navbar: {
                 title: "ACME Sky",
                 logo: {
-                    alt: "My Site Logo",
+                    alt: "ACME Sky",
                     src: "img/logo.png",
                 },
                 items: [
@@ -85,6 +86,16 @@ const config = {
                 theme: prismThemes.github,
                 darkTheme: prismThemes.dracula,
             },
+            zoom: {
+                //selector: '.markdown > img',
+                background: {
+                  light: 'rgb(255, 255, 255)',
+                  dark: 'rgb(50, 50, 50)'
+                },
+                config: {
+                  // options you can specify via https://github.com/francoischalifour/medium-zoom#usage
+                }
+              }
         }),
 };
 

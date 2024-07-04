@@ -37,8 +37,8 @@ slug: /choreos/
 // Ricezione offerte last minute (ripetuta per tutte le compagnie aeree)
 // Viene ripetuta per ogni compagnia aerea collegata ad ACMEsky
 // sendLastMinute: invia le offerte last minute
-// repsponseLastMinute: risposta successo o fallimento
-( sendLastMinute: AIRₖ -> ACME ; repsponseLastMinute: ACME -> AIRₖ )*
+// responseLastMinute: risposta successo o fallimento
+( sendLastMinute: AIRₖ -> ACME ; responseLastMinute: ACME -> AIRₖ )*
 |
 
 // Notifica dell'offerta all'utente
@@ -49,13 +49,6 @@ slug: /choreos/
 ( offerToken: ACME -> PTG ; notifyUser: PTG -> USERₓ ; 
   notifyResponse: USERₓ -> PTG ; messageSended: PTG -> ACME )*
 |
-
-// Richiesta ticket
-// getInvoice: mesaagio di richiesta ricevuta dell'offerta pagata
-// invoice: messaggio con la ricevuta del viaggio
-( getInvoice: USERₓ -> ACME ; invoice: ACME -> USERₓ )*
-|
-
 // Conferma dell'offerta e pagamento
 // confirmOffer: messaggio di conferma offerta e pagamento
 ( 
@@ -133,6 +126,8 @@ slug: /choreos/
 
 ### Proiezioni
 
+Nella sezione seguente vengono descritte solamente le proiezioni considerante significative per i rispettivi ruoli / attori.
+
 #### ACMEsky
 
 ```JS
@@ -143,7 +138,7 @@ proj(FlightQuery, ACME) =
 ```JS
 proj(ReceiveLastMinute, ACME) = 
                           __________________
-  ( sendLastMinute@AIRₖ ; repsponseLastMinute@AIRₖ )*
+  ( sendLastMinute@AIRₖ ; responseLastMinute@AIRₖ )*
 ```
 ```JS
 proj(RegisterInterest, ACME) = 
@@ -156,14 +151,9 @@ proj(SendOffer, ACME) =
   ( offer@PTG ; 1 ; 1 ; messageSent@PTG )*
 ```
 ```JS
-proj(RichiestaRicevuta, ACME) = 
-                       _______
-  ( getInvoice@USERₓ ; invoice@USERₓ )*
-```
-```JS
-proj(AcquistoOfferta, ACME) = 
+proj(confirmOffer, ACME) = 
   ( confirmOffer@USERₓ ; 
-    (                                                     ___________
+    (  _______________                                    ___________
       (responseOfferOk@USERₓ ; requestPaymentLink@USERₓ ; bookTickets@AIRₖ
         (
           ( 
@@ -174,24 +164,22 @@ proj(AcquistoOfferta, ACME) =
             paymentLink@USERₓ ; 1 ;
             (
               (
-                successPaymentBank@BANK ;
+                1; successPaymentBank@BANK ;
                         _______________
                 ( 1 + ( requestDistance@GEO ; responseDistance@GEO ;
                             ___________________
                   ( 1 + ( ( requestDistanceRent@GEO ; responseDistanceRent@GEO )* ;
-                    ____________________
-                    requestRentDeparture@RENTₜ ; responseRentDeparture@RENTₜ ;
-                    _________________
-                    requestRentReturn@RENTₜ ; responseRentReturn@RENTₜ
-                  ) )
-                ) ) _____________        __________
-              ) + ( unbookTickets@AIRₖ ; emitCoupon@BANK )
+                    ___________
+                    requestRent@RENTₜ ; responseRent@RENTₜ ;
+                      ) 
+                    )
+                  ); __________________
+                )    SendJourneyReceipt@USERₓ
+              ) 
             )
-                                  ____________
-          ) + flightNotFound@AIRₖ errorTickets@USERₓ 
+          )
         )
-          __________________
-      ) + responseOfferError@USERₓ
+      )
     )
   )*
 ```
@@ -199,47 +187,35 @@ proj(AcquistoOfferta, ACME) =
 #### Utente
 
 ```JS
-proj(QueryDeiVoli, USERₓ) = 
-  ( 1 ; 1 )*
-```
-```JS
-proj(RicezioneOfferteLastMinute, USERₓ) = 
-  ( 1 ; 1 )*
-```
-```JS
-proj(RegistrazioneInteresse, USERₓ) = 
+proj(RegisterInterest, USERₓ) = 
     _______________
   ( requestInterest@ACME ; responseInterest@ACME )*
 ```
 ```JS
-proj(NotificaOfferta, USERₓ) = 
+proj(SendOffer, USERₓ) = 
                          ______________
   ( 1 ; notifyUser@PTG ; notifyResponse@PTG ; 1 )*
 ```
 ```JS
-proj(RichiestaRicevuta, USERₓ) = 
-    __________
-  ( getInvoice@ACME ; invoice@ACME )*
-```
-```JS
-proj(AcquistoOfferta, USERₓ) = 
+proj(confirmOffer, USERₓ) = 
     ____________
   ( confirmOffer@ACME ; 
     (                          __________________
       ( responseOfferOk@ACME ; requestPaymentLink@ACME ; 1 ;
-        (
+        (                                  _______
           ( 1 ; 1 ; 1 ; paymentLink@ACME ; payment@BANK ;
             (
               (
-                1 ;
-                ( 1 + ( 1 ; 1 ;
-                  ( 1 + (( 1 ; 1)* ; 1 ; 1 ; 1 ; 1 ))
-                ))
-              ) + ( 1 ; 1 )
+                1 ; //successPaymentBank: BANK ->ACME
+                ( 1 + ( 1 ; 1 ; //req distance
+                  ( 1 + (( 1 ; 1)* ; 1 ; 1 ;))
+                  )
+                );  SendJourneyReceipt@ACME
+              )
             )
-          ) + ( 1 ; errorTickets@ACME )
+          )
         )
-      ) + responseOfferError@ACME
+      )
     )
   )*
 ```
@@ -247,46 +223,34 @@ proj(AcquistoOfferta, USERₓ) =
 #### Airline service
 
 ```JS
-proj(QueryDeiVoli, AIRₖ) = 
+proj(QueryFlights, AIRₖ) = 
                         _______________
   ( queryFlights@ACME ; responseFlights@ACME )*
 ```
 ```JS
-proj(RicezioneOfferteLastMinute, AIRₖ) = 
+proj(sendLastMinute, AIRₖ) = 
     ______________
-  ( sendLastMinute@ACME ; repsponseLastMinute@ACME )*
+  ( sendLastMinute@ACME ; responseLastMinute@ACME )*
 ```
 ```JS
-proj(RegistrazioneInteresse, AIRₖ) = 
-  ( 1 ; 1 )*
-```
-```JS
-proj(NotificaOfferta, AIRₖ) = 
-  ( 1 ; 1 ; 1 ; 1 )*
-```
-```JS
-proj(RichiestaRicevuta, AIRₖ) =
-  ( 1 ; 1 )*
-```
-```JS
-proj(AcquistoOfferta, AIRₖ) =
+proj(confirmOffer, AIRₖ) =
   ( 1 ; 
     (
       (1 ; 1 ; bookTickets@ACME ;
         (
           ( _______________
             responseTickets@ACME ;
-            1 ; 1 ; 1 ; 1 ;
+            1 ; 1 ; 1 ;
             (
-              ( 1 ;
-                ( 1 + ( 1 ; 1 ;
-                  ( 1 + (( 1 ; 1)* ; 1 ; 1 ; 1 ; 1 ))
-                ))
-              ) + ( unbookTickets@ACME ; 1 )
-            )   _______________
-          ) + ( responseTickets@ACME ; 1 )
+              ( 1; 1 ;
+                ( 1 + ( 1 ; 1 ;)*
+                  (1 ; 1 )
+                ) 1 ;
+              )
+            ) 
+          ) 
         )
-      ) + 1
+      )
     )
   )*
 ```
@@ -294,92 +258,34 @@ proj(AcquistoOfferta, AIRₖ) =
 #### Prontogram
 
 ```JS
-proj(QueryDeiVoli, PTG) = 
-  ( 1 ; 1 )*
-```
-```JS
-proj(RicezioneOfferteLastMinute, PTG) =
-  ( 1 ; 1 )*
-```
-```JS
-proj(RegistrazioneInteresse, PTG) = 
-  ( 1 ; 1 )*
-```
-```JS
-proj(NotificaOfferta, PTG) = 
+proj(SendOffer, PTG) = 
                       __________
   ( offerToken@ACME ; notifyUser@USERₓ ; 
                            _____________
     notifyResponse@USERₓ ; messageSended@ACME )*
 ```
-```JS
-proj(RichiestaRicevuta, PTG) =
-  ( 1 ; 1 )*
-```
-```JS
-proj(AcquistoOfferta, PTG) = 
-  ( 1 ; 
-    (
-      ( 1 ; 1 ; 1 ;
-        (
-          ( 1 ; 1 ; 1 ; 1 ; 1 ;
-            (
-              ( 1 ;
-                ( 1 + ( 1 ; 1 ;
-                  ( 1 + (( 1 ; 1)* ; 1 ; 1 ; 1 ; 1 ))
-                ))
-              ) + ( 1 ; 1 )
-            )
-          ) + ( 1 ; 1 )
-        )
-      ) + 1
-    )
-  )*
-```
 
 #### Bank service
-
 ```JS
-proj(QueryDeiVoli, BANK) = 
-  ( 1 ; 1 )*
-```
-```JS
-proj(RicezioneOfferteLastMinute, BANK) = 
-  ( 1 ; 1 )*
-```
-```JS
-proj(RegistrazioneInteresse, BANK) = 
-  ( 1 ; 1 )*
-```
-```JS
-proj(NotificaOfferta, BANK) = 
-  ( 1 ; 1 ; 1 ; 1 )*
-```
-```JS
-proj(RichiestaRicevuta, BANK) = 
-  ( 1 ; 1 )*
-```
-```JS
-proj(AcquistoOfferta, BANK) = 
+proj(confirmOffer, BANK) = 
   ( 1 ; 
     (
       ( 1 ; 1 ; 1 ;
         (
           (                            ____________
-            1 ; requestBankLink@ACME ; responselink@ACME ; 
-            1 ; payment@USERₓ ;
+            1 ; requestBankLink@ACME ; responselink@ACME ; 1
             (
-              ( __________________
-                successPaymentBank@ACME ;
-                        _______________
-                ( 1 + ( 1 ; 1 ;
-                  ( 1 + (( 1 ; 1)* ; 1 ; 1 ; 1 ; 1 ))
-                ))
-              ) + ( 1 ; emitCoupon@ACME )
+              (                __________________
+                payment@USERₓ ;successPaymentBank@ACME ;
+                (
+                 1 + ( 1 ; 1 ;
+                  ( 1 + (( 1 ; 1)* ; 1 ; 1))
+                ))  1 ;
+              )
             )
-          ) + ( 1 ; 1 )
+          )
         )
-      ) + 1
+      )
     )
   )*
 ```
@@ -387,45 +293,27 @@ proj(AcquistoOfferta, BANK) =
 #### Geographical Distance service
 
 ```JS
-proj(QueryDeiVoli, GEO) = 
-  ( 1 ; 1 )*
-```
-```JS
-proj(RicezioneOfferteLastMinute, GEO) = 
-  ( 1 ; 1 )*
-```
-```JS
-proj(RegistrazioneInteresse, GEO) = 
-  ( 1 ; 1 )*
-```
-```JS
-proj(NotificaOfferta, GEO) = 
-  ( 1 ; 1 ; 1 ; 1 )*
-```
-```JS
-proj(RichiestaRicevuta, GEO) = 
-  ( 1 ; 1 )*
-```
-```JS
-proj(AcquistoOfferta, GEO) = 
+proj(confirmOffer, GEO) = 
   ( 1 ; 
     (
       ( 1 ; 1 ; 1 ;
         (
-          ( 1 ; 1 ; 1 ; 1 ; 1 ;
+          ( 1 ; 1 ; 1 ; 1;
             (
-              ( 1 ;
+              (
+                1 ; 1;
                                                ________________
-                ( 1 + ( requestDistance@ACME ; responseDistance@ACME ;
-                                                      ____________________
-                  ( 1 + (( requestDistanceRent@ACME ; responseDistanceRent@ACME )* ; 
-                    1 ; 1 ; 1 ; 1 ))
-                ))
-              ) + ( 1 ; 1 )
+                  ( 1 + ( requestDistance@ACME ; responseDistance@ACME ;
+                                                        ____________________
+                    ( 1 + (( requestDistanceRent@ACME ; responseDistanceRent@ACME )* ; 
+                  ) 1; 1)
+                )
+              )  1 ;
             )
-          ) + ( 1 ; 1 )
+          )
+         )
         )
-      ) + 1
+      )
     )
   )*
 ```
@@ -433,46 +321,24 @@ proj(AcquistoOfferta, GEO) =
 #### Rent Service
 
 ```JS
-proj(QueryDeiVoli, RENTₜ) = 
-  ( 1 ; 1 )*
-```
-```JS
-proj(RicezioneOfferteLastMinute, RENTₜ) = 
-  ( 1 ; 1 )*
-```
-```JS
-proj(RegistrazioneInteresse, RENTₜ) = 
-  ( 1 ; 1 )*
-```
-```JS
-proj(NotificaOfferta, RENTₜ) = 
-  ( 1 ; 1 ; 1 ; 1 )*
-```
-```JS
-proj(RichiestaRicevuta, RENTₜ) = 
-  ( 1 ; 1 )*
-```
-```JS
-proj(AcquistoOfferta, RENTₜ) = 
+proj(confirmOffer, RENTₜ) = 
   ( 1 ; 
     (
       ( 1 ; 1 ; 1 ;
         (
-          ( 1 ; 1 ; 1 ; 1 ; 1 ;
+          ( 1 ; 1 ; 1 ; 1 ;
             (
-              ( 1 ;
-                ( 1 + ( 1 ; 1 ;  
-                  ( 1 + (( 1 ; 1)* ; 
-                                                _____________________
-                    requestRentDeparture@ACME ; responseRentDeparture@ACME ;
-                                             __________________
-                    requestRentReturn@ACME ; responseRentReturn@ACME ))
-                ))
-              ) + ( 1 ; 1 )
+              ( 1 ; 1 ;  
+                ( 1 + ( ( 1 ; 1 )*; 
+                                             ____________
+                          requestRent@ACME ; responseRent@ACME ;
+                    )
+                ) 1 ;
+              )
             )
-          ) + ( 1 ; 1 )
+          )
         )
-      ) + 1
+      ) 
     )
   )*
 ```
