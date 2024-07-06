@@ -75,6 +75,7 @@ Strutture dati (custom types) necessarie per le richieste e risposte sono descri
 type loginRequest{
     .username: string
     .password: string
+    .sid?:     string
 }
 
 type logoutRequest{
@@ -103,7 +104,8 @@ type prontoResponse :void{
 type sendMessageRequest{
     .message:   string
     .username:      string
-    .expiration?:    string
+    .expiration:    string
+    .sid?:      string
 }
 ```
 Nelle strutture, l'attributo ```sid``` è l'identificatore univoco generato dal server Jolie per il managing delle sessioni utente, che agirà come valore del cookie in grado di gestire l'autenticazione.
