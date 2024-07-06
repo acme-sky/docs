@@ -137,10 +137,12 @@ Come si evince dal codice queste vengono inviate in formato JSON da un client al
 
 ## Frontend
 
-TO-DO
+![Screenshot frontend](/img/prontogram-frontend.png)
+
+Il frontend di Prontogram è un semplice progetto realizzato tramite l'utilizzo del framework React, che permette di visualizzare i propri messaggi inviati da AcmeSky, effettuando un login.
 
 ## Codice sorgente
 
 Il server, scritto in Jolie, è presente alla seguente [repository Github](https://github.com/acme-sky/prontogram).
 
-Il frontend, scritto tramite l'utilizzo del framework React, è presente alla seguente [repository Github](https://github.com/acme-sky/prontogram-frontend).
+Il frontend, è presente alla seguente [repository Github](https://github.com/acme-sky/prontogram-frontend).
