@@ -53,7 +53,14 @@ TODO
 
 ### Frontend
 
-TODO
+Il Frontend del progetto Acmesky è sviluppato utilizzando Next.js, una scelta che garantisce facilità, modularità e un'integrazione fluida con il resto del sistema. Grazie alla sua struttura modulare, Next.js permette di costruire componenti riutilizzabili e facilmente manutenibili, semplificando l'aggiornamento e l'espansione delle funzionalità. Le pagine principali di Acmesky evidenziano le caratteristiche distintive del progetto: la home page infatti offre una panoramica intuitiva e veloce delle funzioni chiave usufruibili dall'utente.
+Il design è pensato per essere intuibile e reattivo, garantendo un'esperienza utente fluida su qualsiasi dispositivo. L'interfaccia semplice e pulita assicura che gli utenti possano navigare facilmente tra le diverse sezioni, trovando rapidamente le informazioni di cui hanno bisogno.
+- Dashboard: contiene i links alle diverse sezioni e features del sito, oltre ad un recap delle informazioni dell'utente.
+- Add a new Interest: permette all'untente di aggiungere un interesse per un futuro viaggio.
+- My interests: permette di visualizzare gli interessi salvati.
+- Journeys: permette di visualizzare i journeys creati da AcmeSky in base agli interessi dell'utente.
+- Offers: permette di visualizzare / riscattare le offerte create da AcmeSky per l'utente.
+- Invoices: permette di visualizzare le ricevute e i relativi journeys dell'utente, oltre alle eventuali informazioni per il servizio premium.
 
 ## Esterni
 
