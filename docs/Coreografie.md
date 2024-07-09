@@ -121,8 +121,138 @@ slug: /choreos/
   )
 )*
 ```
+### Verifica connectedness delle coreografie
 
+Per verificare se la coreografia fornita verifica la proprietà di connessione, dobbiamo scomporla e analizzare ogni composizione, scelta e iterazione sequenziale. Di seguito un'analisi dettagliata della coreografia asincrona precedentemente rappresentata, passo dopo passo:
+Per quanto riguarda la prima parte della coreografia globale:
+```JS
+( requestInterest: USERₓ -> ACME ; responseInterest: ACME -> USERₓ )* 
+|   
+( queryFlights: ACME -> AIRₖ ; responseFlights: AIRₖ -> ACME )* 
+| 
+( sendLastMinute: AIRₖ -> ACME ; responseLastMinute: ACME -> AIRₖ )*
+|
+( offerToken: ACME -> PTG ; notifyUser: PTG -> USERₓ ; 
+  notifyResponse: USERₓ -> PTG ; messageSended: PTG -> ACME )*
+```
+La proprietà di connectedness è verificata in quanto si tratta di operazioni parallele, in cui il mittente della prima operazione è il ricevente della seconda operazione e, viceversa, il ricevente della prima operazione è il mittente della seconda e i ruoli rimangono gli stessi.
 
+Per quanto riguarda invece l'operazione ```confirmOffer```:
+```JS
+confirmOffer: USERₓ -> ACME ; 
+(
+  // Confirmation of the offer
+  responseOfferOk: ACME -> USERₓ ;
+  requestPaymentLink: USERₓ -> ACME ;
+  bookTickets: ACME -> AIRₖ ;
+  (
+    // Booking tickets and payment link generation
+    responseTickets: AIRₖ -> ACME ;
+    requestBankLink: ACME -> BANK ; 
+    responselink: BANK -> ACME ;
+    paymentLink: ACME -> USERₓ ;
+    (
+      // Payment process
+      payment: USERₓ -> BANK ;
+      successPaymentBank: BANK -> ACME ;
+      (
+        // Additional services based on payment amount
+        1 
+        + 
+        (
+          requestDistance: ACME -> GEO ; 
+          responseDistance: GEO -> ACME ; 
+          (
+            1 
+            +  
+            (
+              requestDistanceRent: ACME -> GEO ; 
+              responseDistanceRent: GEO -> ACME ;
+              requestRent: ACME -> RENTₜ ; 
+              responseRent: RENTₜ -> ACME ;
+            )
+          )
+        )
+      ) ;
+      SendJourneyReceipt: ACME -> USERₓ;
+    )
+  )
+)
+```
+**Passo 1**: confirmOffer: USERₓ -> ACME ; responseOfferOk: ACME -> USERₓ
+- USERₓ -> ACME
+- ACME -> USERₓ
+- Connettività: USERₓ è il mittente della prima interazione e il ricevente della seconda interazione, quindi è connesso.
+
+**Passo 2**: responseOfferOk: ACME -> USERₓ ; requestPaymentLink: USERₓ -> ACME- 
+- ACME -> USERₓ
+- USERₓ -> ACME
+- Connettività: USERₓ è coinvolto in entrambe le interazioni, garantendo la connettività.
+
+**Passo 3**: requestPaymentLink: USERₓ -> ACME ; bookTickets: ACME -> AIRₖ
+- USERₓ -> ACME
+- ACME -> AIRₖ
+- Connettività: ACME è coinvolto in entrambe le interazioni, garantendo la connettività.
+
+**Passo 4**: bookTickets: ACME -> AIRₖ ; responseTickets: AIRₖ -> ACME
+- ACME -> AIRₖ
+- AIRₖ -> ACME
+- Connettività: ACME e AIRₖ sono coinvolti in entrambe le interazioni, garantendo la connettività.
+
+**Passo 5**: responseTickets: AIRₖ -> ACME ; requestBankLink: ACME -> BANK
+- AIRₖ -> ACME
+- ACME -> BANK
+- Connettività: ACME è coinvolto in entrambe le interazioni, garantendo la connettività.
+
+**Passo 6**: requestBankLink: ACME -> BANK ; responselink: BANK -> ACME
+- ACME -> BANK
+- BANK -> ACME
+- Connettività: ACME e BANK sono coinvolti in entrambe le interazioni, garantendo la connettività.
+
+**Passo 7**: responselink: BANK -> ACME ; paymentLink: ACME -> USERₓ
+- BANK -> ACME
+- ACME -> USERₓ
+- Connettività: ACME è coinvolto in entrambe le interazioni, garantendo la connettività.
+
+**Passo 8**: paymentLink: ACME -> USERₓ ; payment: USERₓ -> BANK
+- ACME -> USERₓ
+- USERₓ -> BANK
+- Connettività: USERₓ è coinvolto in entrambe le interazioni, garantendo la connettività.
+
+**Passo 9**: payment: USERₓ -> BANK ; successPaymentBank: BANK -> ACME
+- USERₓ -> BANK
+- BANK -> ACME
+- Connettività: BANK è coinvolto in entrambe le interazioni, garantendo la connettività.
+
+**Passo 10**: successPaymentBank: BANK -> ACME
+
+- Branch 1: 1
+
+- Branch 2: requestDistance: ACME -> GEO ; responseDistance: GEO -> ACME
+
+  - Connettività: Il primo Branch 1 rappresenta un elemento neutro (nessuna interazione), quindi è connesso.
+  Nel secondo Branch, ACME è coinvolto in entrambe le interazioni:
+  ACME -> GEO ; GEO -> ACME
+
+**Passo 11**: responseDistance: GEO -> ACME
+
+- Branch 1: 1
+
+- Branch 2: requestDistanceRent: ACME -> GEO ; responseDistanceRent: GEO -> ACME
+  ; requestRent: ACME -> RENTₜ ; responseRent: RENTₜ -> ACME
+  - Connettività: Il primo Branch 1 è un elemento neutro. 
+  Nel secondo Branch: ACME -> GEO ; GEO -> ACME; ACME -> RENTₜ ; RENTₜ -> ACME.
+   ACME è coinvolto in tutte le interazioni, garantendo la connettività.
+
+**Passo 12**: Interazione finale
+SendJourneyReceipt: ACME -> USERₓ in risposta a USERₓ -> ACME
+
+#### Conclusione
+
+Ogni composizione sequenziale si connette appropriatamente con almeno un ruolo condiviso.
+Ogni scelta assicura che gli stessi ruoli siano coinvolti inizialmente e non crea rami disconnessi.
+Le iterazioni coinvolgono ruoli consistenti durante tutto il corpo del ciclo.
+Pertanto, l'operazione confirmOffer, insieme alle sue interazioni annidate, verifica la proprietà di connettività, assicurando che la coreografia sia connessa.
 
 ### Proiezioni
 

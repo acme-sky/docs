@@ -75,6 +75,7 @@ Strutture dati (custom types) necessarie per le richieste e risposte sono descri
 type loginRequest{
     .username: string
     .password: string
+    .sid?:     string
 }
 
 type logoutRequest{
@@ -103,7 +104,8 @@ type prontoResponse :void{
 type sendMessageRequest{
     .message:   string
     .username:      string
-    .expiration?:    string
+    .expiration:    string
+    .sid?:      string
 }
 ```
 Nelle strutture, l'attributo ```sid``` è l'identificatore univoco generato dal server Jolie per il managing delle sessioni utente, che agirà come valore del cookie in grado di gestire l'autenticazione.
@@ -137,10 +139,12 @@ Come si evince dal codice queste vengono inviate in formato JSON da un client al
 
 ## Frontend
 
-TO-DO
+![Screenshot frontend](/img/prontogram-frontend.png)
+
+Il frontend di Prontogram è un semplice progetto realizzato tramite l'utilizzo del framework React, che permette di visualizzare i propri messaggi inviati da AcmeSky, effettuando un login.
 
 ## Codice sorgente
 
 Il server, scritto in Jolie, è presente alla seguente [repository Github](https://github.com/acme-sky/prontogram).
 
-Il frontend, scritto tramite l'utilizzo del framework React, è presente alla seguente [repository Github](https://github.com/acme-sky/prontogram-frontend).
+Il frontend, è presente alla seguente [repository Github](https://github.com/acme-sky/prontogram-frontend).
