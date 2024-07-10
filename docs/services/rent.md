@@ -94,6 +94,10 @@ $ docker compose up
 
 ![Rent input port](/img/rent-inputport.png)
 
+### BookRent
+
+Chiamata impiegata per la creazione di una nuova prenotazione di transfer.
+
 
 - La richiesta è del tipo `RentRequest`.
 ```
@@ -125,8 +129,45 @@ Un test può essere fatto dal seguente payload:
          <CustomerName>Mario</CustomerName>
          <PickupAddress>Via Zamboni 33, Bologna</PickupAddress>
          <Address>Mura Anteo Zamboni 7, Bologna</Address>
-         <PickupDate>2024-03-02T13:10:00Z</PickupDate>
+         <PickupDate>02/01/2006 15:04</PickupDate>
       </rent:BookRent>
+   </soapenv:Body>
+</soapenv:Envelope>
+```
+
+### GetRentById
+
+Chiamata impiegata per la mostra di dati di una prenotazione dato un ID.
+
+- La richiesta è del tipo `GetRentRequest`.
+```
+type GetRentRequest: void {
+     .RentId[1,1]: string
+}
+```
+
+- La risposta è del tipo `GetRentResponse`.
+```
+type GetRentResponse: void {
+     .Status[1,1]: string
+     .RentId[1,1]: string
+     .PickupAddress[1,1]: string
+     .Address[1,1]: string
+     .Error[0,1]: string
+     .CustomerName[1,1]: string
+     .PickupDate[1,1]: string
+}
+```
+
+Un test può essere fatto dal seguente payload:
+
+```xml
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:rent="uber.acmesky.cs.unibo.it.xsd">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <rent:GetRentById>
+         <RentId>d7c04dca-29d7-490f-851c-1da794e301b9</RentId>
+      </rent:GetRentById>
    </soapenv:Body>
 </soapenv:Envelope>
 ```

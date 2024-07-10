@@ -9,7 +9,7 @@ Il servizio Bank funge da gateway di pagamenti per ACMESky, simile al noto servi
 
 È composto da due parti:
 
-1. **API**: Una REST API scritta in OCaml che espone endpoint accessibili solo ai possessori di un `API-TOKEN`, nonché endpoint pubblici come quello per la conferma del pagamento.
+1. **API**: Una REST API scritta in Go che espone endpoint accessibili solo ai possessori di un `API-TOKEN`, nonché endpoint pubblici come quello per la conferma del pagamento.
 
 2. **Frontend**: Realizzato in Vue.js, il frontend consiste in una single-page mostrata all'utente per completare il pagamento inserendo i dati della propria carta di credito. Il link alla pagina è generato da Bank durante la creazione del pagamento da parte di ACMESky.
 
@@ -25,7 +25,7 @@ cd bank-service
 export POSTGRES_USER="$pg_user"
 export POSTGRES_PASSWORD="$pg_pass"
 export POSTGRES_DB="$pg_db"
-export DATABASE_URL="postgres://$pg_user:$pg_pass@bankservice-postgres:5432/$pg_db"
+export DATABASE_DSN="host=bankservice-postgres user=$pg_user password=$pg_pass dbname=$pg_db port=5342"
 export API_TOKEN="$api_token"
 
 docker build -t acmesky-bankservice-api api
