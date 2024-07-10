@@ -20,16 +20,31 @@ export PROCESS_ID="Process_User"
 export RABBITMQ_URI="amqp://guest:guest@localhost:5672/"
 export SENTRY_DSN="<dsn che viene generato da Sentry>"
 export DATABASE_DSN="host=host user=user password=pass dbname=acmesky port=5432"
-export AIRLINES="https://airline1.com/v1,https//airline2.com/api"
-export AIRLINE_LOGIN_USERNAME="admin"
-export AIRLINE_LOGIN_PASSWORD="pass"
 export OFFER_VALIDATION_TIME=24
-export BANK_ENDPOINT="http://api.bank.com"
-export BANK_PAYMENT_ENDPOINT="http://bank.com/?id="
-export BANK_CALLBACK="http://backend.acmesky.com/api/pay"
-export BANK_TOKEN="<token-segreto>"
-export GEODISTANCE_API="127.0.0.1:50051"
+export PRONTOGRAM_ENDPOINT=http://prontogram:8000/api
+export BANK_ENDPOINT=http://bankservice-api:8080
+export BANK_PAYMENT_ENDPOINT=http://http://localhost:9281/?id=
+export BANK_CALLBACK=http://acmesky-api:8080/v1/offers/pay
+export BANK_TOKEN=token
+export GEODISTANCE_API=acmesky-geodistance:50051
 ```
+
+Una tabella `airlines` con una sola compagnia aerea può essere:
+
+```
+ id | created_at |  name   | login_username | login_password |             endpoint
+----+------------+---------+----------------+----------------+-----------------------------------
+  1 |            | WizzAir | wizzadmin      | pass           | http://airlineservice-api:8080/v1
+```
+
+Una tabella `rents` con una sola compagnia di rent può essere:
+
+```
+ id | created_at | name |  latitude  | longitude  |                  endpoint
+----+------------+------+------------+------------+---------------------------------------------
+  1 |            | Uber | 37.4844103 | 15.0729718 | http://rent-leonardo:8081/uber-acmesky.wsdl
+```
+
 
 È possibile fare un deploy del worker e di [Camunda
 Platform](https://github.com/camunda/camunda-platform) usando docker-compose

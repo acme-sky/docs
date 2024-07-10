@@ -9,6 +9,8 @@ slug: /architecture/
 
 Nello schema sopra riportato, è possibile distinguere chiaramente i vari servizi terziari dai servizi offerti da ACMESky. Di seguito, analizzeremo nel dettaglio la struttura di questi servizi e illustreremo come ACMESky li utilizza.
 
+Tutti i servizi comunicano all'interno di un'unica rete Docker.
+
 ## Database
 
 Usiamo solo PostgreSQL, un database NoSQL open-source. L'istanza che si vede
@@ -108,6 +110,22 @@ Le tabelle presenti nel database sono le seguenti:
  login_password | text                     |           |          |
  endpoint       | text                     |           |          |
 ```
+
+- `invoices`
+
+```
+       Column        |           Type           | Collation | Nullable |               Default
+---------------------+--------------------------+-----------+----------+--------------------------------------
+ id                  | bigint                   |           | not null | nextval('invoices_id_seq'::regclass)
+ created_at          | timestamp with time zone |           |          |
+ rent_id             | text                     |           |          |
+ rent_customer_name  | text                     |           |          |
+ rent_pickup_address | text                     |           |          |
+ rent_pickup_date    | text                     |           |          |
+ rent_address        | text                     |           |          |
+ journey_id          | bigint                   |           |          |
+ user_id             | bigint                   |           |          |
+ ```
 
 - `users`
 
