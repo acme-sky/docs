@@ -345,11 +345,11 @@ Ogni istanza rappresenta una compagnia aerea distinta, consentendo di simulare u
 
 ### Bank
 
-Questo servizio è composto da due parti principali: un backend scritto in OCaml e un frontend sviluppato in Vue.js.
+Questo servizio è composto da due parti principali: un backend scritto in Go e un frontend sviluppato in Vue.js.
 
-#### Backend in OCaml
+#### Backend in Go
 
-Il backend del servizio di pagamento è scritto in OCaml, un linguaggio di programmazione funzionale. Questo backend espone una REST API che permette al [worker](#worker) di interfacciarsi con esso per eseguire varie operazioni di pagamento.
+Il backend del servizio di pagamento è scritto in Go, un linguaggio di programmazione funzionale. Questo backend espone una REST API che permette al [worker](#worker) di interfacciarsi con esso per eseguire varie operazioni di pagamento.
 
 Quando un utente avvia una transazione di pagamento, il worker comunica con il backend attraverso chiamate REST. Queste chiamate includono le informazioni necessarie per processare il pagamento, come l'importo e le credenziali di pagamento dell'utente.
 
