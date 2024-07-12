@@ -179,6 +179,7 @@ handlers
 │   ├── st_save_flight.go
 │   ├── st_save_flights_as_available.go
 │   ├── st_save_last_minute_offer.go
+│   ├── st_sort_rent_services.go
 │   ├── tm_ack_flight_request_save.go
 │   ├── tm_ask_for_rent.go
 │   ├── tm_ask_payment_link.go
@@ -186,10 +187,9 @@ handlers
 │   ├── tm_compute_distance_user_airport.go
 │   ├── tm_error_on_book_journey.go
 │   ├── tm_error_on_check_offer.go
-│   ├── tm_find_nearest_available_rent_company.go
-│   ├── tm_journey.go
-│   ├── tm_journey_and_rent.go
-│   ├── tm_journey_rent_error.go
+│   ├── tm_invoice.go
+│   ├── tm_invoice_and_rent.go
+│   ├── tm_invoice_rent_error.go
 │   ├── tm_search_flight_on_airline.go
 │   ├── tm_send_offer.go
 │   └── tm_send_payment_link.go
