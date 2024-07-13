@@ -275,6 +275,8 @@ I messaggi utilizzati per attivare un sotto-processo non timer-catch sono i segu
 
 La REST API è il cuore del servizio web di ACMESky, fungendo da punto di interazione principale tra il frontend e il backend del sistema. Gli utenti finali interagiscono con il servizio esclusivamente attraverso il frontend, il quale invia richieste alla REST API per eseguire varie operazioni.
 
+![Swagger screenshot](/img/swagger-acmeskyapi.png)
+
 #### Separazione della Business Logic
 
 È importante notare che la REST API non contiene la business logic. Questa separazione è cruciale per mantenere una struttura del codice pulita e modulare. La business logic risiede invece nei worker, che sono componenti specializzati nell'esecuzione delle operazioni richieste.
