@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="generator" content="Docusaurus v3.1.1">
 <title data-rh="true">Servizi | ACME Sky</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:image" content="https://acme-sky.github.io/docs/img/docs-social-card.jpg"><meta data-rh="true" name="twitter:image" content="https://acme-sky.github.io/docs/img/docs-social-card.jpg"><meta data-rh="true" property="og:url" content="https://acme-sky.github.io/docs/services"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="Servizi | ACME Sky"><meta data-rh="true" name="description" content="ACMESky"><meta data-rh="true" property="og:description" content="ACMESky"><link data-rh="true" rel="icon" href="/docs/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://acme-sky.github.io/docs/services"><link data-rh="true" rel="alternate" href="https://acme-sky.github.io/docs/services" hreflang="en"><link data-rh="true" rel="alternate" href="https://acme-sky.github.io/docs/services" hreflang="x-default"><link rel="stylesheet" href="/docs/assets/css/styles.e85c0f04.css">
-<script src="/docs/assets/js/runtime~main.b8e41a9f.js" defer="defer"></script>
+<script src="/docs/assets/js/runtime~main.104ff0c1.js" defer="defer"></script>
 <script src="/docs/assets/js/main.554d196a.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
@@ -14,9 +14,9 @@
 <p>L&#x27;architettura del worker è descritta nella sua <a href="/docs/architecture#worker">sezione
 apposita</a>. Qui di seguito viene descritto un suo set
 up d&#x27;esempio.</p>
-<div class="language-sh codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-sh codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">export ZEEBE_ADDRESS=&quot;localhost:26500&quot;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">export BPMN_FILE=&quot;bpmn/acmesky.bpmn&quot;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">export PROCESS_ID=&quot;Process_User&quot;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">export RABBITMQ_URI=&quot;amqp://guest:guest@localhost:5672/&quot;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">export SENTRY_DSN=&quot;&lt;dsn che viene generato da Sentry&gt;&quot;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">export DATABASE_DSN=&quot;host=host user=user password=pass dbname=acmesky port=5432&quot;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">export OFFER_VALIDATION_TIME=24</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">export PRONTOGRAM_ENDPOINT=http://prontogram:8000/api</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">export BANK_ENDPOINT=http://bankservice-api:8080</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">export BANK_PAYMENT_ENDPOINT=http://http://localhost:9281/?id=</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">export BANK_CALLBACK=http://acmesky-api:8080/v1/offers/pay</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">export BANK_TOKEN=token</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">export GEODISTANCE_API=acmesky-geodistance:50051</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<div class="language-sh codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-sh codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">export ZEEBE_ADDRESS=&quot;localhost:26500&quot;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">export BPMN_FILE=&quot;bpmn/acmesky.bpmn&quot;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">export PROCESS_ID=&quot;Process_User&quot;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">export RABBITMQ_URI=&quot;amqp://guest:guest@localhost:5672/&quot;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">export SENTRY_DSN=&quot;&lt;dsn che viene generato da Sentry&gt;&quot;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">export DATABASE_DSN=&quot;host=host user=user password=pass dbname=acmesky port=5432&quot;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">export OFFER_VALIDATION_TIME=24</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">export PRONTOGRAM_ENDPOINT=http://prontogram:8000/api</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">export BANK_ENDPOINT=http://bankservice-api:8080</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">export BANK_PAYMENT_ENDPOINT=http://http://localhost:9281/?id=</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">export BANK_CALLBACK=http://acmesky-api:8080`/v1/offers/pay</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">export BANK_TOKEN=token</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">export GEODISTANCE_API=acmesky-geodistance:50051</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
 <p>Una tabella <code>airlines</code> con una sola compagnia aerea può essere:</p>
-<div class="codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain"> id | created_at |  name   | login_username | login_password |             endpoint</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">----+------------+---------+----------------+----------------+-----------------------------------</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  1 |            | WizzAir | wizzadmin      | pass           | http://airlineservice-api:8080/v1</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<div class="codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain"> id | created_at |  name   | login_username | login_password |             endpoint</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">----+------------+---------+----------------+----------------+-----------------------------------</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  1 |            | WizzAir | wizzadmin      | pass           | http://airlineservice-api:8080`/v1</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
 <p>Una tabella <code>rents</code> con una sola compagnia di rent può essere:</p>
 <div class="codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain"> id | created_at | name |  latitude  | longitude  |                  endpoint</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">----+------------+------+------------+------------+---------------------------------------------</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  1 |            | Uber | 37.4844103 | 15.0729718 | http://rent-leonardo:8081/uber-acmesky.wsdl</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
 <p>È possibile fare un deploy del worker e di <a href="https://github.com/camunda/camunda-platform" target="_blank" rel="noopener noreferrer">Camunda
@@ -26,7 +26,225 @@ presente nella cartella del codice sorgente.</p>
 <p>Se non viene usato Docker, il servizio può essere eseguito con</p>
 <div class="codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">$ go run main.go</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
 <h3 class="anchor anchorWithStickyNavbar_LWe7" id="backend">Backend<a href="#backend" class="hash-link" aria-label="Direct link to Backend" title="Direct link to Backend">​</a></h3>
-<p>TODO</p>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="availableflight-handlers">AvailableFlight Handlers<a href="#availableflight-handlers" class="hash-link" aria-label="Direct link to AvailableFlight Handlers" title="Direct link to AvailableFlight Handlers">​</a></h4>
+<h5 class="anchor anchorWithStickyNavbar_LWe7" id="availableflighthandlerget">AvailableFlightHandlerGet<a href="#availableflighthandlerget" class="hash-link" aria-label="Direct link to AvailableFlightHandlerGet" title="Direct link to AvailableFlightHandlerGet">​</a></h5>
+<ul>
+<li><strong>Endpoint</strong>: <code>/v1/available-flights/</code></li>
+<li><strong>Method</strong>: GET</li>
+<li><strong>Description</strong>: Recupera tutti i voli disponibili. Se l&#x27;utente è un amministratore, vengono restituiti tutti i voli. Altrimenti, vengono restituiti solo i voli relativi all&#x27;utente.</li>
+<li><strong>Responses</strong>:
+  - 200: Lista dei voli disponibili.
+  - 400: Utente non definito.
+  - 404: Utente non trovato.</li>
+</ul>
+<h5 class="anchor anchorWithStickyNavbar_LWe7" id="availableflighthandlergetid">AvailableFlightHandlerGetId<a href="#availableflighthandlergetid" class="hash-link" aria-label="Direct link to AvailableFlightHandlerGetId" title="Direct link to AvailableFlightHandlerGetId">​</a></h5>
+<ul>
+<li><strong>Endpoint</strong>: <code>/v1/available-flights/{availableFlightId}/</code></li>
+<li><strong>Method</strong>: GET</li>
+<li><strong>Description</strong>: Recupera un volo disponibile tramite il suo ID.</li>
+<li><strong>Responses</strong>:
+  - 200: Dati del volo disponibile.
+  - 400: Utente non definito.
+  - 404: Volo disponibile o utente non trovato.
+  - 401: Accesso non autorizzato.</li>
+</ul>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="interest-handlers">Interest Handlers<a href="#interest-handlers" class="hash-link" aria-label="Direct link to Interest Handlers" title="Direct link to Interest Handlers">​</a></h4>
+<h5 class="anchor anchorWithStickyNavbar_LWe7" id="interesthandlerget">InterestHandlerGet<a href="#interesthandlerget" class="hash-link" aria-label="Direct link to InterestHandlerGet" title="Direct link to InterestHandlerGet">​</a></h5>
+<ul>
+<li><strong>Endpoint</strong>: <code>/v1/interests/</code></li>
+<li><strong>Method</strong>: GET</li>
+<li><strong>Description</strong>: Recupera tutti gli interessi. Se l&#x27;utente è un amministratore, vengono restituiti tutti gli interessi. Altrimenti, vengono restituiti solo gli interessi relativi all&#x27;utente.</li>
+<li><strong>Responses</strong>:
+  - 200: Lista degli interessi.
+  - 400: Utente non definito.
+  - 404: Utente non trovato.</li>
+</ul>
+<h5 class="anchor anchorWithStickyNavbar_LWe7" id="interesthandlerpost">InterestHandlerPost<a href="#interesthandlerpost" class="hash-link" aria-label="Direct link to InterestHandlerPost" title="Direct link to InterestHandlerPost">​</a></h5>
+<ul>
+<li><strong>Endpoint</strong>: <code>/v1/interests/filter/</code></li>
+<li><strong>Method</strong>: POST</li>
+<li><strong>Description</strong>: Crea un nuovo interesse basato sull&#x27;input JSON della richiesta.</li>
+<li><strong>Responses</strong>:
+  - 201: Interesse creato.
+  - 400: Utente non definito o input non valido.</li>
+</ul>
+<h5 class="anchor anchorWithStickyNavbar_LWe7" id="interesthandlergetid">InterestHandlerGetId<a href="#interesthandlergetid" class="hash-link" aria-label="Direct link to InterestHandlerGetId" title="Direct link to InterestHandlerGetId">​</a></h5>
+<ul>
+<li><strong>Endpoint</strong>: <code>/v1/interests/{interestId}/</code></li>
+<li><strong>Method</strong>: GET</li>
+<li><strong>Description</strong>: Recupera un interesse tramite il suo ID.</li>
+<li><strong>Responses</strong>:
+  - 200: Dati dell&#x27;interesse.
+  - 400: Utente non definito.
+  - 404: Interesse o utente non trovato.
+  - 401: Accesso non autorizzato.</li>
+</ul>
+<h5 class="anchor anchorWithStickyNavbar_LWe7" id="interesthandlerdelete">InterestHandlerDelete<a href="#interesthandlerdelete" class="hash-link" aria-label="Direct link to InterestHandlerDelete" title="Direct link to InterestHandlerDelete">​</a></h5>
+<ul>
+<li><strong>Endpoint</strong>: <code>/v1/interests/{interestId}/</code></li>
+<li><strong>Method</strong>: DELETE</li>
+<li><strong>Description</strong>: Elimina un interesse tramite il suo ID.</li>
+<li><strong>Responses</strong>:
+  - 204: Interesse eliminato.
+  - 400: Utente non definito.
+  - 404: Interesse o utente non trovato.
+  - 401: Accesso non autorizzato.</li>
+</ul>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="invoice-handlers">Invoice Handlers<a href="#invoice-handlers" class="hash-link" aria-label="Direct link to Invoice Handlers" title="Direct link to Invoice Handlers">​</a></h4>
+<h5 class="anchor anchorWithStickyNavbar_LWe7" id="invoicehandlerget">InvoiceHandlerGet<a href="#invoicehandlerget" class="hash-link" aria-label="Direct link to InvoiceHandlerGet" title="Direct link to InvoiceHandlerGet">​</a></h5>
+<ul>
+<li><strong>Endpoint</strong>: <code>/v1/invoices/</code></li>
+<li><strong>Method</strong>: GET</li>
+<li><strong>Description</strong>: Recupera tutte le fatture. Se l&#x27;utente è un amministratore, vengono restituite tutte le fatture. Altrimenti, vengono restituite solo le fatture relative all&#x27;utente.</li>
+<li><strong>Responses</strong>:
+  - 200: Lista delle fatture.
+  - 400: Utente non definito.
+  - 404: Utente non trovato.</li>
+</ul>
+<h5 class="anchor anchorWithStickyNavbar_LWe7" id="invoicehandlergetid">InvoiceHandlerGetId<a href="#invoicehandlergetid" class="hash-link" aria-label="Direct link to InvoiceHandlerGetId" title="Direct link to InvoiceHandlerGetId">​</a></h5>
+<ul>
+<li><strong>Endpoint</strong>: <code>/v1/invoices/{invoiceId}/</code></li>
+<li><strong>Method</strong>: GET</li>
+<li><strong>Description</strong>: Recupera una fattura tramite il suo ID.</li>
+<li><strong>Responses</strong>:
+  - 200: Dati della fattura.
+  - 400: Utente non definito.
+  - 404: Fattura o utente non trovato.
+  - 401: Accesso non autorizzato.</li>
+</ul>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="journey-handlers">Journey Handlers<a href="#journey-handlers" class="hash-link" aria-label="Direct link to Journey Handlers" title="Direct link to Journey Handlers">​</a></h4>
+<h5 class="anchor anchorWithStickyNavbar_LWe7" id="journeyhandlerget">JourneyHandlerGet<a href="#journeyhandlerget" class="hash-link" aria-label="Direct link to JourneyHandlerGet" title="Direct link to JourneyHandlerGet">​</a></h5>
+<ul>
+<li><strong>Endpoint</strong>: <code>/v1/journeys/</code></li>
+<li><strong>Method</strong>: GET</li>
+<li><strong>Description</strong>: Recupera tutti i viaggi. Se l&#x27;utente è un amministratore, vengono restituiti tutti i viaggi. Altrimenti, vengono restituiti solo i viaggi relativi all&#x27;utente.</li>
+<li><strong>Responses</strong>:
+  - 200: Lista dei viaggi.
+  - 400: Utente non definito.
+  - 404: Utente non trovato.</li>
+</ul>
+<h5 class="anchor anchorWithStickyNavbar_LWe7" id="journeyhandlergetid">JourneyHandlerGetId<a href="#journeyhandlergetid" class="hash-link" aria-label="Direct link to JourneyHandlerGetId" title="Direct link to JourneyHandlerGetId">​</a></h5>
+<ul>
+<li><strong>Endpoint</strong>: <code>/v1/journeys/{journeyId}/</code></li>
+<li><strong>Method</strong>: GET</li>
+<li><strong>Description</strong>: Recupera un viaggio tramite il suo ID.</li>
+<li><strong>Responses</strong>:
+  - 200: Dati del viaggio.
+  - 400: Utente non definito.
+  - 404: Viaggio o utente non trovato.
+  - 401: Accesso non autorizzato.</li>
+</ul>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="login-handlers">Login Handlers<a href="#login-handlers" class="hash-link" aria-label="Direct link to Login Handlers" title="Direct link to Login Handlers">​</a></h4>
+<h5 class="anchor anchorWithStickyNavbar_LWe7" id="loginhandler">LoginHandler<a href="#loginhandler" class="hash-link" aria-label="Direct link to LoginHandler" title="Direct link to LoginHandler">​</a></h5>
+<ul>
+<li><strong>Endpoint</strong>: <code>/v1/login/</code></li>
+<li><strong>Method</strong>: POST</li>
+<li><strong>Description</strong>:
+  - Autentica un utente verificando il suo nome utente e password.
+  - Le password sono memorizzate come hash SHA256 nel database.
+  - Se l&#x27;autenticazione ha successo, viene generato e restituito all&#x27;utente un JWT (JSON Web Token) per effettuare richieste autenticate.</li>
+<li><strong>Responses</strong>:
+  - 200 OK in caso di login riuscito con JWT e ID utente.
+  - 400 Bad Request o 404 Not Found in caso di fallimento.</li>
+</ul>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="offer-handlers">Offer Handlers<a href="#offer-handlers" class="hash-link" aria-label="Direct link to Offer Handlers" title="Direct link to Offer Handlers">​</a></h4>
+<h5 class="anchor anchorWithStickyNavbar_LWe7" id="offerhandlerget">OfferHandlerGet<a href="#offerhandlerget" class="hash-link" aria-label="Direct link to OfferHandlerGet" title="Direct link to OfferHandlerGet">​</a></h5>
+<ul>
+<li><strong>Endpoint</strong>: <code>/v1/offers/</code></li>
+<li><strong>Method</strong>: GET</li>
+<li><strong>Description</strong>:
+  - Recupera le offerte dal database in base al ruolo dell&#x27;utente (amministratore o utente normale).
+  - Gli amministratori ricevono tutte le offerte, mentre gli utenti normali ricevono solo le proprie.</li>
+<li><strong>Response</strong>:
+  - 200 OK con l&#x27;elenco delle offerte e il conteggio.</li>
+</ul>
+<h5 class="anchor anchorWithStickyNavbar_LWe7" id="offerhandlergetid">OfferHandlerGetId<a href="#offerhandlergetid" class="hash-link" aria-label="Direct link to OfferHandlerGetId" title="Direct link to OfferHandlerGetId">​</a></h5>
+<ul>
+<li><strong>Endpoint</strong>: <code>/v1/offers/{offerId}/</code></li>
+<li><strong>Method</strong>: GET</li>
+<li><strong>Description</strong>:
+  - Recupera i dettagli di un&#x27;offerta specifica dal database.
+  - Solo il proprietario dell&#x27;offerta o un amministratore possono accedere ai dettagli dell&#x27;offerta.</li>
+<li><strong>Response</strong>:
+  - 200 OK con i dettagli dell&#x27;offerta.
+  - 404 Not Found o 401 Unauthorized se l&#x27;offerta non viene trovata o l&#x27;utente non è autorizzato.</li>
+</ul>
+<h5 class="anchor anchorWithStickyNavbar_LWe7" id="offerconfirmhandlerpost">OfferConfirmHandlerPost<a href="#offerconfirmhandlerpost" class="hash-link" aria-label="Direct link to OfferConfirmHandlerPost" title="Direct link to OfferConfirmHandlerPost">​</a></h5>
+<ul>
+<li><strong>Endpoint</strong>: <code>/v1/offers/confirm/</code></li>
+<li><strong>Method</strong>: POST</li>
+<li><strong>Description</strong>:
+  - Convalida il token dell&#x27;offerta fornito e l&#x27;ID utente.
+  - Invia un messaggio per confermare l&#x27;offerta.</li>
+<li><strong>Response</strong>:
+  - 200 OK in caso di conferma riuscita.
+  - 400 Bad Request o 404 Not Found in caso di fallimento.</li>
+</ul>
+<h5 class="anchor anchorWithStickyNavbar_LWe7" id="offerhandlerpay">OfferHandlerPay<a href="#offerhandlerpay" class="hash-link" aria-label="Direct link to OfferHandlerPay" title="Direct link to OfferHandlerPay">​</a></h5>
+<ul>
+<li><strong>Endpoint</strong>: <code>/v1/offers/{offerId}/pay/</code></li>
+<li><strong>Method</strong>: POST</li>
+<li><strong>Description</strong>:
+  - Elabora il pagamento per un&#x27;offerta specifica identificata dal suo ID.
+  - Invia un messaggio indicando lo stato del pagamento.</li>
+<li><strong>Response</strong>:
+  - 200 OK in caso di pagamento riuscito.
+  - 404 Not Found in caso di fallimento.</li>
+</ul>
+<h5 class="anchor anchorWithStickyNavbar_LWe7" id="offerhandlerlastminute">OfferHandlerLastMinute<a href="#offerhandlerlastminute" class="hash-link" aria-label="Direct link to OfferHandlerLastMinute" title="Direct link to OfferHandlerLastMinute">​</a></h5>
+<ul>
+<li><strong>Endpoint</strong>: <code>/v1/offers/last-minute/</code></li>
+<li><strong>Method</strong>: POST</li>
+<li><strong>Description</strong>:
+  - Elabora un&#x27;offerta dell&#x27;ultimo minuto inviando le informazioni pertinenti come messaggio.</li>
+<li><strong>Response</strong>:
+  - 200 OK in caso di elaborazione riuscita.
+  - 400 Bad Request in caso di fallimento.</li>
+</ul>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="signup-handlers">Signup Handlers<a href="#signup-handlers" class="hash-link" aria-label="Direct link to Signup Handlers" title="Direct link to Signup Handlers">​</a></h4>
+<h5 class="anchor anchorWithStickyNavbar_LWe7" id="signuphandler">SignupHandler<a href="#signuphandler" class="hash-link" aria-label="Direct link to SignupHandler" title="Direct link to SignupHandler">  ​</a></h5>
+<ul>
+<li><strong>Endpoint</strong>: <code>/v1/signup/</code></li>
+<li><strong>Method</strong>: POST</li>
+<li><strong>Description</strong>:
+  - Crea un nuovo account utente.
+  - Convalida i dati di input, assicurando che non ci siano nomi utente o email duplicati e che il formato dell&#x27;email sia corretto.</li>
+<li><strong>Response</strong>:
+  - 201 Created in caso di registrazione riuscita con i dettagli dell&#x27;utente.
+  - 400 Bad Request in caso di fallimento.</li>
+</ul>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="user-handlers">User Handlers<a href="#user-handlers" class="hash-link" aria-label="Direct link to User Handlers" title="Direct link to User Handlers">​</a></h4>
+<h5 class="anchor anchorWithStickyNavbar_LWe7" id="userhandlerget">UserHandlerGet<a href="#userhandlerget" class="hash-link" aria-label="Direct link to UserHandlerGet" title="Direct link to UserHandlerGet">​</a></h5>
+<ul>
+<li><strong>Endpoint</strong>: <code>/v1/users/</code></li>
+<li><strong>Method</strong>: GET</li>
+<li><strong>Description</strong>:
+  - Recupera tutti gli account utente dal database, escludendo le password.</li>
+<li><strong>Response</strong>:
+  - 200 OK con l&#x27;elenco degli utenti e il conteggio.</li>
+</ul>
+<h5 class="anchor anchorWithStickyNavbar_LWe7" id="userhandlergetid">UserHandlerGetId<a href="#userhandlergetid" class="hash-link" aria-label="Direct link to UserHandlerGetId" title="Direct link to UserHandlerGetId">​</a></h5>
+<ul>
+<li><strong>Endpoint</strong>: <code>/v1/users/{userId}/</code></li>
+<li><strong>Method</strong>: GET</li>
+<li><strong>Description</strong>:
+  - Recupera i dettagli di un utente specifico dal database.
+  - Solo l&#x27;utente stesso o un amministratore possono accedere ai dettagli dell&#x27;utente.</li>
+<li><strong>Response</strong>:
+  - 200 OK con i dettagli dell&#x27;utente.
+  - 404 Not Found o 400 Bad Request se l&#x27;utente non viene trovato o il richiedente non è autorizzato.</li>
+</ul>
+<h5 class="anchor anchorWithStickyNavbar_LWe7" id="userhandlerput">UserHandlerPut<a href="#userhandlerput" class="hash-link" aria-label="Direct link to UserHandlerPut" title="Direct link to UserHandlerPut">​</a></h5>
+<ul>
+<li><strong>Endpoint</strong>: <code>/v1/users/{userId}/</code></li>
+<li><strong>Method</strong>: PUT</li>
+<li><strong>Description</strong>:
+  - Permette a un utente di aggiornare i dettagli del proprio account.
+  - Solo l&#x27;utente stesso o un amministratore possono eseguire l&#x27;aggiornamento.</li>
+<li><strong>Response</strong>:
+  - 200 OK in caso di aggiornamento riuscito con i dettagli dell&#x27;utente aggiornati.
+  - 404 Not Found o 400 Bad Request se l&#x27;utente non viene trovato o il richiedente non è autorizzato.</li>
+</ul>
 <h3 class="anchor anchorWithStickyNavbar_LWe7" id="frontend">Frontend<a href="#frontend" class="hash-link" aria-label="Direct link to Frontend" title="Direct link to Frontend">​</a></h3>
 <p>Il Frontend del progetto Acmesky è sviluppato utilizzando Next.js, una scelta che garantisce facilità, modularità e un&#x27;integrazione fluida con il resto del sistema. Grazie alla sua struttura modulare, Next.js permette di costruire componenti riutilizzabili e facilmente manutenibili, semplificando l&#x27;aggiornamento e l&#x27;espansione delle funzionalità. Le pagine principali di Acmesky evidenziano le caratteristiche distintive del progetto: la home page infatti offre una panoramica intuitiva e veloce delle funzioni chiave usufruibili dall&#x27;utente.
 Il design è pensato per essere intuibile e reattivo, garantendo un&#x27;esperienza utente fluida su qualsiasi dispositivo. L&#x27;interfaccia semplice e pulita assicura che gli utenti possano navigare facilmente tra le diverse sezioni, trovando rapidamente le informazioni di cui hanno bisogno.</p>
