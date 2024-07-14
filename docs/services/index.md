@@ -64,6 +64,9 @@ $ go run main.go
 
 ### Backend
 
+L'api (REST) del backend di AcmeSky, tramite gli handlers sotto descritti, permette l'interazione con l'intero backend del sistema. Comunica con i workers e con gli altri servizi tramite api, permette l'interazione con i database e con il message broker.
+
+L'api, scritta in Go,è presente alla seguente [repository Github](https://github.com/acme-sky/acmesky-api).
 
 #### AvailableFlight Handlers
 
