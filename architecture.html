@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="generator" content="Docusaurus v3.1.1">
 <title data-rh="true">Architettura | ACME Sky</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:image" content="https://acme-sky.github.io/docs/img/docs-social-card.jpg"><meta data-rh="true" name="twitter:image" content="https://acme-sky.github.io/docs/img/docs-social-card.jpg"><meta data-rh="true" property="og:url" content="https://acme-sky.github.io/docs/architecture"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="Architettura | ACME Sky"><meta data-rh="true" name="description" content="Architecture scheme"><meta data-rh="true" property="og:description" content="Architecture scheme"><link data-rh="true" rel="icon" href="/docs/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://acme-sky.github.io/docs/architecture"><link data-rh="true" rel="alternate" href="https://acme-sky.github.io/docs/architecture" hreflang="en"><link data-rh="true" rel="alternate" href="https://acme-sky.github.io/docs/architecture" hreflang="x-default"><link rel="stylesheet" href="/docs/assets/css/styles.e85c0f04.css">
-<script src="/docs/assets/js/runtime~main.4084cf94.js" defer="defer"></script>
+<script src="/docs/assets/js/runtime~main.c4ce95fd.js" defer="defer"></script>
 <script src="/docs/assets/js/main.554d196a.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
@@ -13,7 +13,7 @@
 <p>Nello schema sopra riportato, è possibile distinguere chiaramente i vari servizi terziari dai servizi offerti da ACMESky. Di seguito, analizzeremo nel dettaglio la struttura di questi servizi e illustreremo come ACMESky li utilizza.</p>
 <p>Tutti i servizi comunicano all&#x27;interno di un&#x27;unica rete Docker.</p>
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="database">Database<a href="#database" class="hash-link" aria-label="Direct link to Database" title="Direct link to Database">​</a></h2>
-<p>Usiamo solo PostgreSQL, un database NoSQL open-source. L&#x27;istanza che si vede
+<p>Usiamo solo PostgreSQL, un database open-source. L&#x27;istanza che si vede
 nello schermo è condivisa da <a href="#worker">worker</a> e <a href="#acmesky-web">backend web</a>.</p>
 <p>Le tabelle presenti nel database sono le seguenti:</p>
 <ul>
@@ -128,8 +128,7 @@ Questo approccio consente di mantenere il backend leggero e focalizzato sulla vi
 <li><strong>Manutenibilità</strong>: La separazione tra frontend e backend facilita lo sviluppo indipendente delle due componenti, permettendo aggiornamenti e miglioramenti senza interferenze reciproche.</li>
 </ul>
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="servizi-esterni">Servizi esterni<a href="#servizi-esterni" class="hash-link" aria-label="Direct link to Servizi esterni" title="Direct link to Servizi esterni">​</a></h2>
-<p>Essi sono servizi usati dal <a href="#worker">worker</a> e sono meglio descritti nel loro
-dettaglio in <a href="/docs/services">qui</a>.</p>
+<p>Essi sono servizi usati dal <a href="#worker">worker</a> e sono meglio descritti in dettaglio <a href="/docs/services">in questa sezione</a>.</p>
 <h3 class="anchor anchorWithStickyNavbar_LWe7" id="geodistance">Geodistance<a href="#geodistance" class="hash-link" aria-label="Direct link to Geodistance" title="Direct link to Geodistance">​</a></h3>
 <p>Il servizio Geodistance è progettato per calcolare le distanze tra due indirizzi utilizzando le coordinate geografiche. Questo servizio è scritto in Go e sfrutta l&#x27;API di Google Maps per fornire risultati precisi ed efficienti.</p>
 <h4 class="anchor anchorWithStickyNavbar_LWe7" id="comunicazione-tramite-grpc">Comunicazione tramite gRPC<a href="#comunicazione-tramite-grpc" class="hash-link" aria-label="Direct link to Comunicazione tramite gRPC" title="Direct link to Comunicazione tramite gRPC">​</a></h4>
@@ -162,7 +161,7 @@ Ogni istanza rappresenta una compagnia aerea distinta, consentendo di simulare u
 </ol>
 <p>Una volta completato il processo, l&#x27;utente viene reindirizzato a un link di callback che conferma o nega il pagamento. Questo link può visualizzare un messaggio di successo o di errore, informando l&#x27;utente dell&#x27;esito della transazione.</p>
 <h3 class="anchor anchorWithStickyNavbar_LWe7" id="prontogram">Prontogram<a href="#prontogram" class="hash-link" aria-label="Direct link to Prontogram" title="Direct link to Prontogram">​</a></h3>
-<p>Il servizio di messaggistica Prontogram è progettata per consentire la comunicazione tra il sistema e gli utenti finali durante la fase di generazione di offerte. È diviso in due parti principali: un backend scritto in <a href="https://jolie-lang.org/" target="_blank" rel="noopener noreferrer">Jolie</a> e un frontend sviluppato in <a href="https://react.dev" target="_blank" rel="noopener noreferrer">React</a>.</p>
+<p>Il servizio di messaggistica Prontogram è progettato per consentire la comunicazione tra il sistema e gli utenti finali durante la fase di generazione di offerte. È diviso in due parti principali: un backend scritto in <a href="https://jolie-lang.org/" target="_blank" rel="noopener noreferrer">Jolie</a> e un frontend sviluppato in <a href="https://react.dev" target="_blank" rel="noopener noreferrer">React</a>.</p>
 <h4 class="anchor anchorWithStickyNavbar_LWe7" id="backend-in-jolie">Backend in Jolie<a href="#backend-in-jolie" class="hash-link" aria-label="Direct link to Backend in Jolie" title="Direct link to Backend in Jolie">​</a></h4>
 <p>Il backend del servizio Prontogram è sviluppato utilizzando Jolie, un linguaggio di programmazione progettato specificamente per la costruzione di microservizi e per il <a href="https://en.wikipedia.org/wiki/Choreographic_programming" target="_blank" rel="noopener noreferrer">paradigma di programmazione orientato alle coreografie</a>. Jolie facilita la creazione di servizi distribuiti, garantendo un&#x27;architettura modulare e scalabile.</p>
 <ol>
