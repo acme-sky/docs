@@ -73,7 +73,7 @@ slug: /choreos/
                   )
                 )
               ) ;
-              SendJourneyReceipt: ACME -> USERₓ;
+              SendJourneyInvoice: ACME -> USERₓ;
             )
           ) 
         )
@@ -135,7 +135,7 @@ confirmOffer: USERₓ -> ACME ;
           )
         )
       ) ;
-      SendJourneyReceipt: ACME -> USERₓ;
+      SendJourneyInvoice: ACME -> USERₓ;
     )
   )
 )
@@ -206,7 +206,7 @@ confirmOffer: USERₓ -> ACME ;
    ACME è coinvolto in tutte le interazioni, garantendo la connettività.
 
 **Passo 12**: Interazione finale
-SendJourneyReceipt: ACME -> USERₓ in risposta a USERₓ -> ACME
+SendJourneyInvoice: ACME -> USERₓ in risposta a USERₓ -> ACME
 
 #### Conclusione
 
@@ -265,7 +265,7 @@ proj(confirmOffer, ACME) =
                       ) 
                     )
                   ); __________________
-                )    SendJourneyReceipt@USERₓ
+                )    SendJourneyInvoice@USERₓ
               ) 
             )
           )
@@ -301,7 +301,7 @@ proj(confirmOffer, USERₓ) =
                 ( 1 + ( 1 ; 1 ; //req distance
                   ( 1 + (( 1 ; 1)* ; 1 ; 1 ;))
                   )
-                );  SendJourneyReceipt@ACME
+                );  SendJourneyInvoice@ACME
               )
             )
           )
