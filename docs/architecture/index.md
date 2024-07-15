@@ -13,7 +13,7 @@ Tutti i servizi comunicano all'interno di un'unica rete Docker.
 
 ## Database
 
-Usiamo solo PostgreSQL, un database NoSQL open-source. L'istanza che si vede
+Usiamo solo PostgreSQL, un database open-source. L'istanza che si vede
 nello schermo è condivisa da [worker](#worker) e [backend web](#acmesky-web).
 
 Le tabelle presenti nel database sono le seguenti:
@@ -327,8 +327,7 @@ L'utilizzo di Next.js per il frontend e JWT per l'autenticazione offre numerosi 
 
 ## Servizi esterni
 
-Essi sono servizi usati dal [worker](#worker) e sono meglio descritti nel loro
-dettaglio in [qui](/docs/services/).
+Essi sono servizi usati dal [worker](#worker) e sono meglio descritti in dettaglio [in questa sezione](/docs/services/).
 
 ### Geodistance
 
@@ -384,7 +383,7 @@ Una volta completato il processo, l'utente viene reindirizzato a un link di call
 
 ### Prontogram
 
-Il servizio di messaggistica Prontogram è progettata per consentire la comunicazione tra il sistema e gli utenti finali durante la fase di generazione di offerte. È diviso in due parti principali: un backend scritto in [Jolie](https://jolie-lang.org/) e un frontend sviluppato in [React](https://react.dev).
+Il servizio di messaggistica Prontogram è progettato per consentire la comunicazione tra il sistema e gli utenti finali durante la fase di generazione di offerte. È diviso in due parti principali: un backend scritto in [Jolie](https://jolie-lang.org/) e un frontend sviluppato in [React](https://react.dev).
 
 #### Backend in Jolie
 
